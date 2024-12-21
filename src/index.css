@@ -30,12 +30,22 @@ body {
 }
   
 button {
-    /* border: transparent;
-     */ 
     cursor: pointer;
 }
   
 p, h3, h2 {
     margin: 0;
     padding: 0;
+}
+
+a:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
 }
