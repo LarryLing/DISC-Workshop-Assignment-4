@@ -11,13 +11,17 @@
   -moz-osx-font-smoothing: grayscale;
 
   --purple: #4E2A84;
-  --hover-purple: #371D5D; 
+  --dark-purple: #422370;
+  --darker-purple: #371D5D;
+  
   --search-text: #909090;
   
   --layout-spacing: 16px;
   --padding: 12px;
   --radius: 8px; 
   
+  --thin-border: 2px solid;
+  --thick-border: 4px solid;
   --shadow: 0px 4px 8px rgb(0 0 0 / 25%);
 }
 
@@ -26,8 +30,8 @@ body {
 }
   
 button {
-    border: none;
-    
+    /* border: transparent;
+     */ 
     cursor: pointer;
 }
   

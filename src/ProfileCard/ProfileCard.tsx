@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Profile } from '../Types'
-import './Card.css'
+import ProfileCardStyles from './ProfileCard.module.css'
 
 interface Props {
     profile : Profile;
@@ -8,7 +8,7 @@ interface Props {
     setProfilesAdded : (arg0 : Profile[]) => void;
 }
 
-export default function Card(props : Props) {
+export default function ProfileCard(props : Props) {
     const [isConnected, setIsConnected] = useState(false);
 
     function handleClick() {
@@ -27,18 +27,25 @@ export default function Card(props : Props) {
     }
     
     return (
-        <div className="profile-card">
-            <div className="background">
+        <div className={ProfileCardStyles.profileCard}>
+            <div className={ProfileCardStyles.background}>
                 <img src={ props.profile.backgroundURL } alt="background image"/>
-                <div className="profile-picture">
+                <div className={ProfileCardStyles.profilePicture}>
                     <img src={ props.profile.pictureURL } alt="profile picture"/>
                 </div>
             </div>
-            <div className="text-info">
-                <h3>{ props.profile.name }</h3>
-                <p className="intro">{ props.profile.intro }</p>
-                <button className="connect-button" onClick={ handleClick }>
-                    {isConnected ? "Connected" : "Connect"}
+            <div className={ProfileCardStyles.textInfo}>
+                <h3>
+                    { props.profile.name }
+                </h3>
+                <p className={ProfileCardStyles.intro}>
+                    { props.profile.intro }
+                </p>
+                <button
+                    className={ProfileCardStyles.connectButton} 
+                    style={{background: isConnected ? 'var(--purple)' : '', color: isConnected ? 'white' : ''}} 
+                    onClick={ handleClick }>
+                        {isConnected ? "Connected" : "Connect"}
                 </button>
             </div>
         </div>

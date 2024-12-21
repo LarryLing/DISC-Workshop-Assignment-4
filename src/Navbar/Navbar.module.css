@@ -1,4 +1,4 @@
-.header {
+.navbar {
     background: var(--purple);
     color: #fff;
     
@@ -10,7 +10,7 @@
     width: 100%;
 }
   
-.title-search {
+.titleSearch {
     flex: 1;
     
     display: flex;
@@ -24,7 +24,7 @@
     padding: 0px var(--padding);
 }
   
-.search-bar {
+.searchBar {
     flex: auto;
     
     background: #fff;
@@ -39,7 +39,7 @@
     max-width: 280px;
 }
   
-.buttons {
+.buttonContainer {
     flex: 1;
     
     display: flex;
@@ -49,17 +49,23 @@
     height: inherit;
 }
   
-.header-button {
-        background: var(--purple);
-        color: inherit;
-        
-        height: inherit;
-        
-        padding: 0px var(--padding);
-        
-        transition: all 0.3s;
+.headerButton {
+    background: var(--purple);
+    color: inherit;
+
+    border: transparent;
+    
+    height: inherit;
+    
+    padding: 0px var(--padding);
+    
+    transition: all 0.3s;
 }
   
-.header-button:hover {
-        background: var(--hover-purple);
+.headerButton:hover {
+    background: var(--dark-purple);
+}
+
+.headerButton:active {
+    background: var(--darker-purple);
 }

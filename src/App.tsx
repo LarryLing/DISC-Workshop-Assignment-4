@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Header from './HeaderComponent/Header'
-import Card from './CardComponent/Card';
+import Navbar from './Navbar/Navbar'
+import ProfileCard from './ProfileCard/ProfileCard';
 import { profiles } from './Definitions';
 import { Profile } from './Types';
 import './App.css'
@@ -10,16 +10,15 @@ function App() {
 
     return (
         <div>
-            <Header/>
+            <Navbar/>
             <div id="content" className="content">
                 <div id="profiles" className="profiles">
                     {profiles.map((profile) => (
-                        <div key={ profile.id }>
-                            <Card 
-                                profile={ profile }
-                                profilesAdded={ profilesAdded }
-                                setProfilesAdded={ setProfilesAdded }/>
-                        </div>
+                        <ProfileCard
+                            key={ profile.id } 
+                            profile={ profile }
+                            profilesAdded={ profilesAdded }
+                            setProfilesAdded={ setProfilesAdded }/>
                     ))}
                 </div>
             </div>
