@@ -2,10 +2,11 @@ import { useState } from 'react'
 import Header from './HeaderComponent/Header'
 import Card from './CardComponent/Card';
 import { profiles } from './Definitions';
+import { Profile } from './Types';
 import './App.css'
 
 function App() {
-    const [profilesAdded, setProfilesConnected] = useState([]);
+    const [profilesAdded, setProfilesAdded ] = useState<Profile[]>([]);
 
     return (
         <div>
@@ -13,12 +14,12 @@ function App() {
             <div id="content" className="content">
                 <div id="profiles" className="profiles">
                     {profiles.map((profile) => (
-                        <Card 
-                            id={profile.id} 
-                            name={profile.name} 
-                            intro={profile.intro} 
-                            pictureURL={profile.pictureURL} 
-                            backgroundURL={profile.backgroundURL}/>
+                        <div key={ profile.id }>
+                            <Card 
+                                profile={ profile }
+                                profilesAdded={ profilesAdded }
+                                setProfilesAdded={ setProfilesAdded }/>
+                        </div>
                     ))}
                 </div>
             </div>
