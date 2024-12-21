@@ -1,35 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Header from './HeaderComponent/Header'
+import Card from './CardComponent/Card';
+import { profiles } from './Definitions';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [profilesAdded, setProfilesConnected] = useState([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <div>
+            <Header/>
+            <div id="content" className="content">
+                <div id="profiles" className="profiles">
+                    {profiles.map((profile) => (
+                        <Card 
+                            id={profile.id} 
+                            name={profile.name} 
+                            intro={profile.intro} 
+                            pictureURL={profile.pictureURL} 
+                            backgroundURL={profile.backgroundURL}/>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default App
