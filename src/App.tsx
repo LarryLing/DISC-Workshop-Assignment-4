@@ -6,23 +6,23 @@ import { Profile } from './Types';
 import './App.css'
 
 function App() {
-    const [profilesAdded, setProfilesAdded ] = useState<Profile[]>([]);
+    const [connections, setConnections ] = useState<Profile[]>([]);
 
     return (
-        <div>
+        <>
             <Navbar/>
-            <div id="content" className="content">
-                <div id="profiles" className="profiles">
+            <div className="content">
+                <div className="profiles">
                     {profiles.map((profile) => (
                         <ProfileCard
                             key={ profile.id } 
                             profile={ profile }
-                            profilesAdded={ profilesAdded }
-                            setProfilesAdded={ setProfilesAdded }/>
+                            connections={ connections }
+                            setConnections={ setConnections }/>
                     ))}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

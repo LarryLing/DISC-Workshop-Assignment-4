@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Profile } from '../Types'
 import ProfileCardStyles from './ProfileCard.module.css'
 
 interface Props {
     profile : Profile;
-    profilesAdded : Profile[];
-    setProfilesAdded : (arg0 : Profile[]) => void;
+    connections : Profile[];
+    setConnections : (arg0 : Profile[]) => void;
 }
 
 export default function ProfileCard(props : Props) {
@@ -13,18 +13,27 @@ export default function ProfileCard(props : Props) {
 
     function handleClick() {
         if (!isConnected) {
-            const updatedProfiles = [...props.profilesAdded, props.profile];
+            const updatedProfiles = [...props.connections, props.profile];
 
-            props.setProfilesAdded(updatedProfiles);
+            props.setConnections(updatedProfiles);
         }
         else {
-            const updatedProfiles = props.profilesAdded.filter((profile) => profile !== props.profile);
+            const updatedProfiles = props.connections.filter((profile) => profile !== props.profile);
 
-            props.setProfilesAdded(updatedProfiles);
+            props.setConnections(updatedProfiles);
         }
 
         setIsConnected(!isConnected);
     }
+
+    useEffect(() => {
+        if (isConnected) {
+            console.log("Added " + props.profile.name + " to your list of connections!");
+        }
+        else {
+            console.log("Removed " + props.profile.name + " from your list of connections");
+        }
+    }, [isConnected]);
     
     return (
         <div className={ ProfileCardStyles.profileCard }>
