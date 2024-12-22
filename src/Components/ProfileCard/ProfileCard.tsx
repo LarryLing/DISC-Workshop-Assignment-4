@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Profile } from '../../Types'
-import ProfileCardStyles from './ProfileCard.module.css'
+import { Profile } from '../../Types';
+import ProfileCardStyles from './ProfileCard.module.css';
 
 interface Props {
     profile : Profile;

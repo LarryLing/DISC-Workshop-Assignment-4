@@ -1,5 +1,5 @@
 import { ProfileCard } from "../../Components";
-import { profiles } from "../../Definitions"
+import { profiles } from "../../Definitions";
 import { Profile } from "../../Types";
 import DiscoverPageStyles from './DiscoverPage.module.css';
 

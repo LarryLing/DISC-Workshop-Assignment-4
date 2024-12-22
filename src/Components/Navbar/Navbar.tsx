@@ -1,4 +1,4 @@
-import NavbarStyles from './Navbar.module.css'
+import NavbarStyles from './Navbar.module.css';
 
 export function Navbar() {
     return (
@@ -7,7 +7,7 @@ export function Navbar() {
                 <h2 className={ NavbarStyles.title }>
                     CatsConnect
                 </h2>
-                <input type="text" className={ NavbarStyles.searchBar } placeholder="Search"/>
+                <input id="search-bar" type="text" className={ NavbarStyles.searchBar } placeholder="Search"/>
             </div>
             <div className={ NavbarStyles.buttonContainer }>
                 <button className={ NavbarStyles.headerButton }>
