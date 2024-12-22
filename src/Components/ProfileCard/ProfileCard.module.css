@@ -10,7 +10,7 @@
     
     box-shadow: var(--shadow);
   
-    height: 275px;
+    height: 300px;
 }
   
 .clickableContainer {
@@ -64,23 +64,40 @@
 }
 
 .text {
-    height: 75px;
+    height: 110px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    gap: calc(var(--padding) / 2);
 
     padding: 0 var(--padding);
 }
-  
+
+.text p {
+    color: #545454;
+
+    text-align: center;
+    text-overflow: ellipsis;
+}
+
+.text p:nth-child(2) {
+    font-size: 16px;
+}
+
+.text p:nth-child(3) {
+    font-size: 12px;
+}
+/*   
 .bio {
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
     
     font-size: 12px;
-}
+} */
 
 .buttonContainer {
     display: flex;

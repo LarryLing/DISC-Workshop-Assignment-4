@@ -7,7 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 function App() {
-    const [connections, setConnections ] = useState<Profile[]>([]);
+    const [connections, setConnections] = useState<Profile[]>([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
     return (
         <>

@@ -7,7 +7,7 @@ export const users : User[] = [
         lastName : "Ipsum",
         email : "loremipsum2027@u.northwestern.edu",
         bio : "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        major : "Computer Science",
+        major : "Mathematical Methods in the Social Sciences",
         graduationYear : "2027",
         created_at : "2024-01-26 12:30:45",
         profilePicture : "https://i.imgur.com/O9Wmyek.jpeg",

@@ -46,6 +46,7 @@ export function ProfileCard({ profile, connections, setConnections } : Props) {
                 </div>
                 <div className={ ProfileCardStyles.text }>
                     <h3>{ profile.user.firstName + " " + profile.user.lastName }</h3>
+                    <p>{ profile.user.major + " • " + profile.user.graduationYear }</p>
                     <p className={ ProfileCardStyles.bio }>{ profile.user.bio }</p>
                 </div>
             </a>
