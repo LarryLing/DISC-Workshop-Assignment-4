@@ -4,11 +4,3 @@
 
     padding: var(--padding);
 }
-
-.profiles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
-    gap: var(--layout-spacing);
-    
-    max-width: 90%;
-}

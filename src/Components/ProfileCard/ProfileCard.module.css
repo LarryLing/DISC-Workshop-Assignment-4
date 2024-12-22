@@ -74,7 +74,7 @@
     padding: 0 var(--padding);
 }
   
-.intro {
+.bio {
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;

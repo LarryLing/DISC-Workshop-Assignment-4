@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Profile } from '../Types'
+import { Profile } from '../../Types'
 import ProfileCardStyles from './ProfileCard.module.css'
 
 interface Props {
@@ -8,19 +8,19 @@ interface Props {
     setConnections : (arg0 : Profile[]) => void;
 }
 
-export default function ProfileCard(props : Props) {
+export function ProfileCard({ profile, connections, setConnections } : Props) {
     const [isConnected, setIsConnected] = useState(false);
 
     function handleClick() {
         if (!isConnected) {
-            const updatedProfiles = [...props.connections, props.profile];
+            const updatedProfiles = [...connections, profile];
 
-            props.setConnections(updatedProfiles);
+            setConnections(updatedProfiles);
         }
         else {
-            const updatedProfiles = props.connections.filter((profile) => profile !== props.profile);
+            const updatedProfiles = connections.filter((filteredProfile) => filteredProfile !== profile);
 
-            props.setConnections(updatedProfiles);
+            setConnections(updatedProfiles);
         }
 
         setIsConnected(!isConnected);
@@ -28,25 +28,25 @@ export default function ProfileCard(props : Props) {
 
     useEffect(() => {
         if (isConnected) {
-            console.log("Added " + props.profile.name + " to your list of connections!");
+            console.log("Added " + profile.user.firstName + " " + profile.user.lastName + " to your list of connections!");
         }
         else {
-            console.log("Removed " + props.profile.name + " from your list of connections");
+            console.log("Removed " + profile.user.firstName + " " + profile.user.lastName + " from your list of connections!");
         }
     }, [isConnected]);
     
     return (
         <div className={ ProfileCardStyles.profileCard }>
-            <a className={ ProfileCardStyles.clickableContainer } href={ props.profile.profileURL }>
+            <a className={ ProfileCardStyles.clickableContainer } href={ profile.profileURL }>
                 <div className={ ProfileCardStyles.background }>
-                    <img src={ props.profile.backgroundURL } alt="background image"/>
+                    <img src={ profile.backgroundURL } alt="background image"/>
                 </div>
                 <div className={ ProfileCardStyles.profilePicture }>
-                    <img src={ props.profile.pictureURL } alt="profile picture"/>
+                    <img src={ profile.user.profilePicture } alt="profile picture"/>
                 </div>
                 <div className={ ProfileCardStyles.text }>
-                    <h3>{ props.profile.name }</h3>
-                    <p className={ ProfileCardStyles.intro }>{ props.profile.intro }</p>
+                    <h3>{ profile.user.firstName + " " + profile.user.lastName }</h3>
+                    <p className={ ProfileCardStyles.bio }>{ profile.user.bio }</p>
                 </div>
             </a>
             <div className={ ProfileCardStyles.buttonContainer }>

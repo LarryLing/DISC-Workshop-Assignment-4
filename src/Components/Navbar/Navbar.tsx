@@ -1,6 +1,6 @@
 import NavbarStyles from './Navbar.module.css'
 
-export default function Navbar() {
+export function Navbar() {
     return (
         <nav className={ NavbarStyles.navbar }>
             <div className={ NavbarStyles.titleSearch }>
