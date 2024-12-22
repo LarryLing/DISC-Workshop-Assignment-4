@@ -1,0 +1,11 @@
+.infoWidget {
+    background: #fff;
+
+    width: 100%;
+
+    padding: var(--padding);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}

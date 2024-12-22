@@ -10,6 +10,11 @@ export type User = {
     profilePicture : string;
 }
 
+export type ExtraInfo = {
+    title : string;
+    info : string;
+}
+
 export type Profile = {
     id : number;
     user : User;
