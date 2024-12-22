@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Navbar } from './Components';
 import { Profile } from './Types';
-import { DiscoverPage, ProfilePage } from './Pages';
-import './App.css';
+import { DiscoverPage, HomePage, ProfilePage } from './Pages';
 import { profiles } from './Definitions';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
 
 function App() {
     const [connections, setConnections ] = useState<Profile[]>([]);
@@ -12,8 +13,11 @@ function App() {
         <>
             <Navbar/>
             <div className="content">
-                {/* <DiscoverPage connections={ connections } setConnections={ setConnections }/> */}
-                <ProfilePage profile={ profiles[0] }/>
+                <Routes>
+                    <Route path="/" element={ <HomePage/> }/>
+                    <Route path='/discover' element={ <DiscoverPage connections={ connections } setConnections={ setConnections }/> }/>
+                    <Route path='/myprofile' element={ <ProfilePage profile={ profiles[0] }/> }/>
+                </Routes>
             </div>
         </>
     )

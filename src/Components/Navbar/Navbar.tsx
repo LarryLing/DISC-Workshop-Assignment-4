@@ -1,3 +1,4 @@
+import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import NavbarStyles from './Navbar.module.css';
 
 export function Navbar() {
@@ -7,22 +8,35 @@ export function Navbar() {
                 <h2 className={ NavbarStyles.title }>
                     CatsConnect
                 </h2>
-                <input id="search-bar" type="text" className={ NavbarStyles.searchBar } placeholder="Search"/>
+                <input id="search-bar" type="search" className={ NavbarStyles.searchBar } placeholder="Search"/>
             </div>
-            <div className={ NavbarStyles.buttonContainer }>
-                <button className={ NavbarStyles.headerButton }>
-                    Home
-                </button>
-                <button className={ NavbarStyles.headerButton }>
-                    Discover
-                </button>
-                <button className={ NavbarStyles.headerButton }>
-                    Messages
-                </button>
-                <button className={ NavbarStyles.headerButton }>
-                    My Profile
-                </button>
-            </div>
+            <ul className={ NavbarStyles.linkContainer }>
+                <NavbarLink to="/" children="Home"/>
+                <NavbarLink to="/discover" children="Discover"/>
+                <NavbarLink to="/messages" children="Messages"/>
+                <NavbarLink to="/myprofile" children="My Profile"/>
+            </ul>
         </nav>
+    )
+}
+
+interface NavbarLinkProps {
+    to : string;
+    children : string;
+}
+
+function NavbarLink({to, children} : NavbarLinkProps) {
+    const resolvedPath = useResolvedPath(to);
+    const isActive = useMatch({
+        path : resolvedPath.pathname, 
+        end : true
+    });
+
+    return (
+        <Link to={ to }>
+            <li className={ NavbarStyles.link } style={{ background : isActive ? "var(--dark-purple)" : ""}}>
+                { children }
+            </li>
+        </Link>
     )
 }
