@@ -1,20 +1,33 @@
+import { useEffect, useState } from "react";
 import { ProfileCard } from "../../Components";
-import { profiles } from "../../Definitions";
-import { Profile } from "../../Types";
+import { User } from "../../Types";
 import DiscoverPageStyles from './DiscoverPage.module.css';
 
 interface Props {
-    connections : Profile[];
-    setConnections : (arg0 : Profile[]) => void;
+    connections : User[];
+    setConnections : (arg0 : User[]) => void;
 }
 
 export function DiscoverPage({ connections, setConnections } : Props) {
+    const [fetchedUsers, setFetchedUsers] = useState<User[]>([]);
+
+    useEffect(() => {
+        fetch("https://disc-assignment-5-users-api.onrender.com/api/users")
+            .then(promise => {
+                return promise.json();
+            })
+            .then(users => {
+                setFetchedUsers(users);
+            })
+    }, [])
+
     return (
         <div className={ DiscoverPageStyles.profiles }>
-            {profiles.map((profile) => (
+            {fetchedUsers.map((fetchedUser) => (
                 <ProfileCard
-                    key={ profile.user.id } 
-                    profile={ profile }
+                    key={ fetchedUser.id } 
+                    user={ fetchedUser }
+                    backgroundURL="https://i.imgur.com/Ddu7o5o.jpeg"
                     connections={ connections }
                     setConnections={ setConnections }/>
             ))}

@@ -2,7 +2,7 @@ import InfoContainerStyles from './InfoContainer.module.css';
 
 interface Props {
     title : string;
-    info : string;
+    info : string | undefined;
 }
 
 export function InfoContainer({ title, info} : Props) {

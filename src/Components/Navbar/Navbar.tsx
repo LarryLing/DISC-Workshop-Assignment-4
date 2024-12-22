@@ -11,10 +11,10 @@ export function Navbar() {
                 <input id="search-bar" type="search" className={ NavbarStyles.searchBar } placeholder="Search"/>
             </div>
             <ul className={ NavbarStyles.linkContainer }>
-                <NavbarLink to="/" children="Home"/>
-                <NavbarLink to="/discover" children="Discover"/>
-                <NavbarLink to="/messages" children="Messages"/>
-                <NavbarLink to="/myprofile" children="My Profile"/>
+                <NavbarLink to='/' children="Home"/>
+                <NavbarLink to='/discover' children="Discover"/>
+                <NavbarLink to='/messages' children="Messages"/>
+                <NavbarLink to='/user/myprofile' children="My Profile"/>
             </ul>
         </nav>
     )
