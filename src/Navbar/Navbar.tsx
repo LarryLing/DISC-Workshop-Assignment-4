@@ -20,7 +20,7 @@ export default function Navbar() {
                     Messages
                 </button>
                 <button className={ NavbarStyles.headerButton }>
-                    Profile
+                    My Profile
                 </button>
             </div>
         </nav>
