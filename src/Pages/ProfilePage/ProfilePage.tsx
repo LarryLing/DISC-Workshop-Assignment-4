@@ -82,10 +82,10 @@ export function ProfilePage({ connections, setConnections } : Props) {
                         <p>{ fetchedUser.graduationyear }</p>
                     </div>
                 </div>
-                <div className={ ProfilePageStyles.buttonContainer}>
-                    { !isUser && <ConnectButton user={ fetchedUser } connections={ connections } setConnections={ setConnections }/> }
-                    { !isUser && <EmailButton email={ fetchedUser.email }/> }
-                </div>
+                { !isUser && <div className={ ProfilePageStyles.buttonContainer}>
+                                <ConnectButton user={ fetchedUser } connections={ connections } setConnections={ setConnections }/>
+                                <EmailButton email={ fetchedUser.email }/>
+                            </div> }
                 <InfoContainer title="Bio" info={ fetchedUser.bio }/>
                 <div className={ ProfilePageStyles.dateJoined }>
                     <div>

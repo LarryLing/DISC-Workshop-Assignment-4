@@ -9,8 +9,3 @@ export type User = {
     created_at : string;
     profilepicture : string;
 }
-
-export type ExtraInfo = {
-    title : string;
-    info : string;
-}

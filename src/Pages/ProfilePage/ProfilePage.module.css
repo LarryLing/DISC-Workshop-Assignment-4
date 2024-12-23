@@ -37,13 +37,13 @@ h3 {
 
 .profilePicture {
     background: #fff;
-    top: 150px;
+    top: 130px;
     left: 45px;
 
     position: absolute;
 
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     
     border-radius: var(--radius);
 
