@@ -1,0 +1,37 @@
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+
+    margin: var(--padding);
+}
+  
+.connectButton {
+    background: transparent;
+    color: var(--purple);
+    
+    box-sizing: border-box; 
+    border: var(--thin-border) var(--purple);
+    border-radius: var(--radius);
+    
+    box-shadow: var(--shadow);
+    
+    padding: calc(var(--padding) / 2);
+      
+    width: 150px;
+      
+    font-weight: bold;
+    
+    transition: all 0.3s;
+}
+  
+.connectButton:hover {
+    transform: translateY(-2px);
+}
+
+.connectButton:active {
+    transform: translateY(-1px);
+}

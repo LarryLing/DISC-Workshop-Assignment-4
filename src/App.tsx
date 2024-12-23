@@ -16,7 +16,7 @@ function App() {
                     <Route path="/" element={ <HomePage/> }/>
                     <Route path='/discover' element={ <DiscoverPage connections={ connections } setConnections={ setConnections }/> }/>
                     {/* <Route path='/myprofile' element={ <ProfilePage/> }/> */}
-                    <Route path='/user/:id' element={ <ProfilePage/> }/>
+                    <Route path='/user/:id' element={ <ProfilePage connections={ connections } setConnections={ setConnections }/> }/>
                 </Routes>
             </div>
         </>

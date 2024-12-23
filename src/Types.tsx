@@ -1,13 +1,13 @@
 export type User = {
     id : number;
-    firstName : string;
-    lastName : string;
+    firstname : string;
+    lastname : string;
     email : string;
     bio : string;
     major : string;
-    graduationYear : string;
+    graduationyear : number;
     created_at : string;
-    profilePicture : string;
+    profilepicture : string;
 }
 
 export type ExtraInfo = {
