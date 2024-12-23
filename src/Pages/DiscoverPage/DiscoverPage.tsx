@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ProfileCard } from "../../Components";
 import { User } from "../../Types";
 import DiscoverPageStyles from './DiscoverPage.module.css';
+import { MyID } from "../../Definitions";
 
 interface Props {
     connections : User[];
@@ -48,7 +49,7 @@ export function DiscoverPage({ connections, setConnections } : Props) {
 
     return (
         <div className={ DiscoverPageStyles.profiles }>
-            {fetchedUsers.map((fetchedUser) => {
+            {fetchedUsers.filter(fetchedUser => fetchedUser.id !== MyID).map((fetchedUser) => {
                 return (
                     <ProfileCard
                         key={ fetchedUser.id } 

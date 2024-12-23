@@ -26,7 +26,9 @@ export function ProfileCard({ user, backgroundURL, connections, setConnections }
                     <p>{ user.bio }</p>
                 </div>
             </Link>
-            <ConnectButton user={ user } connections={ connections } setConnections={ setConnections }/>
+            <div className={ ProfileCardStyles.buttonContainer }>
+                <ConnectButton user={ user } connections={ connections } setConnections={ setConnections }/>
+            </div>
         </div>
     )
 }

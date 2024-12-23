@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { User } from '../../Types';
 import DetailedProfile from '../../Components/DetailedProfile/DetailedProfile';
+import { MyID } from '../../Definitions';
 
 interface Props {
     connections : User[];
@@ -9,8 +10,7 @@ interface Props {
 }
 
 export function ProfilePage({ connections, setConnections } : Props) {
-    const params = useParams();
-    const id = params.id;
+    const id = useParams().id;
 
     const [errorOccured, setErrorOccured] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +37,7 @@ export function ProfilePage({ connections, setConnections } : Props) {
                 setIsLoading(false);
             }
         }
-        
+
         fetchUser();
     }, [])
 
@@ -50,6 +50,6 @@ export function ProfilePage({ connections, setConnections } : Props) {
     }
 
     return (
-        <DetailedProfile user={ fetchedUser } connections={ connections } setConnections={ setConnections }/>
+        <DetailedProfile user={ fetchedUser } isUser={ Number(id) === MyID } connections={ connections } setConnections={ setConnections }/>
     )
 }

@@ -1,6 +1,6 @@
-.connectButton {
-    background: transparent;
-    color: var(--purple);
+.emailButton {
+    background: var(--purple);
+    color: white;
     
     box-sizing: border-box; 
     border: var(--thin-border) var(--purple);
@@ -17,10 +17,10 @@
     transition: all 0.3s;
 }
   
-.connectButton:hover {
+.emailButton:hover {
     transform: translateY(-2px);
 }
 
-.connectButton:active {
+.emailButton:active {
     transform: translateY(-1px);
 }

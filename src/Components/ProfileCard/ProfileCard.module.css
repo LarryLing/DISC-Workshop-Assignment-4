@@ -86,3 +86,16 @@
 
     font-size: 12px;
 }
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+
+    box-sizing: content-box;
+
+    padding: var(--padding);
+}
+  

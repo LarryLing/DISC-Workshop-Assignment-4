@@ -2,16 +2,18 @@ import { User } from '../../Types';
 import { InfoContainer } from '../InfoContainer/InfoContainer';
 import DetailedProfileStyles from './DetailedProfile.module.css';
 import { ConnectButton } from '../ConnectButton/ConnectButton';
+import EmailButton from '../EmailButton/EmailButton';
 
 interface Props {
     user : User | undefined;
+    isUser : boolean;
     connections : User[];
     setConnections : (arg0 : User[]) => void;
 }
 
-export default function DetailedProfile({ user, connections, setConnections } : Props) {
+export default function DetailedProfile({ user, isUser, connections, setConnections } : Props) {
     if (!user) {
-        return <div>Tried to display an undefined user!</div>
+        return <div>Tried to display an undefined user!</div>;
     }
 
     // TODO: make api call to get respective backgroundURL
@@ -40,8 +42,11 @@ export default function DetailedProfile({ user, connections, setConnections } : 
                         <p>{ user.graduationyear }</p>
                     </div>
                 </div>
-                <ConnectButton user={ user } connections={ connections } setConnections={ setConnections }/>
-                <InfoContainer title="Bio" info={ user?.bio }/>
+                <div className={ DetailedProfileStyles.buttonContainer}>
+                    { !isUser && <ConnectButton user={ user } connections={ connections } setConnections={ setConnections }/> }
+                    { !isUser && <EmailButton email={ user.email }/> }
+                </div>
+                <InfoContainer title="Bio" info={ user.bio }/>
             </div>
         </div>
     )

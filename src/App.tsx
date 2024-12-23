@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 function App() {
+    // TODO: change connections so that it is a dictionary-like object to optimize lookup times
     const [connections, setConnections] = useState<User[]>([]);
 
     return (
@@ -15,7 +16,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={ <HomePage/> }/>
                     <Route path='/discover' element={ <DiscoverPage connections={ connections } setConnections={ setConnections }/> }/>
-                    {/* <Route path='/myprofile' element={ <ProfilePage/> }/> */}
                     <Route path='/user/:id' element={ <ProfilePage connections={ connections } setConnections={ setConnections }/> }/>
                 </Routes>
             </div>

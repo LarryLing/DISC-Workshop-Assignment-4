@@ -1,5 +1,6 @@
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import NavbarStyles from './Navbar.module.css';
+import { MyID } from '../../Definitions';
 
 export function Navbar() {
     return (
@@ -14,7 +15,7 @@ export function Navbar() {
                 <NavbarLink to='/' children="Home"/>
                 <NavbarLink to='/discover' children="Discover"/>
                 <NavbarLink to='/messages' children="Messages"/>
-                <NavbarLink to='/user/myprofile' children="My Profile"/>
+                <NavbarLink to={`/user/${ MyID }`} children="My Profile"/>
             </ul>
         </nav>
     )

@@ -9,6 +9,8 @@ interface Props {
 }
 
 export function ConnectButton({ user, connections, setConnections } : Props) {
+    // TODO: use useContext hook for connections and setConnections to fix prop drilling
+
     const [isConnected, setIsConnected] = useState(false);
 
     function handleClick() {
@@ -18,7 +20,7 @@ export function ConnectButton({ user, connections, setConnections } : Props) {
             setConnections(updatedConnections);
         }
         else {
-            const updatedProfiles = connections.filter((filteredUser) => filteredUser !== user);
+            const updatedProfiles = connections.filter(filteredUser => filteredUser.id !== user.id);
 
             setConnections(updatedProfiles);
         }
@@ -27,22 +29,17 @@ export function ConnectButton({ user, connections, setConnections } : Props) {
     }
 
     useEffect(() => {
-        if (isConnected) {
-            console.log("Added " + user.firstname + " " + user.lastname + " to your list of connections!");
+        if (connections.some(connection => connection.id === user.id)) {
+            setIsConnected(true);
         }
-        else {
-            console.log("Removed " + user.firstname + " " + user.lastname + " from your list of connections!");
-        }
-    }, [isConnected]);
+    }, [])
 
     return (
-        <div className={ ConnectButtonStyles.buttonContainer }>
-            <button
-                className={ConnectButtonStyles.connectButton} 
-                style={{ background: isConnected ? 'var(--purple)' : '', color: isConnected ? 'white' : '' }} 
-                onClick={ handleClick }>
-                    { isConnected ? "Connected" : "Connect" }
-            </button>
-        </div>
+        <button
+            className={ ConnectButtonStyles.connectButton } 
+            style={{ background: isConnected ? 'var(--purple)' : '', color: isConnected ? 'white' : '' }} 
+            onClick={ handleClick }>
+                { isConnected ? "Connected" : "Connect" }
+        </button>
     )
 }

@@ -82,6 +82,15 @@
     text-align: center;
 }
 
+.buttonContainer {
+    width: 100%;
+    
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: var(--padding);
+}
+
 h3 {
     font-size: 20px;
 }
