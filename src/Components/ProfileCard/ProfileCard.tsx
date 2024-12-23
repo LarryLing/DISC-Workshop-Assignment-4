@@ -1,7 +1,7 @@
 import { User } from '../../Types';
 import { Link } from 'react-router-dom';
+import { ConnectButton } from '../';
 import ProfileCardStyles from './ProfileCard.module.css';
-import { ConnectButton } from '../ConnectButton/ConnectButton';
 
 interface Props {
     user : User;

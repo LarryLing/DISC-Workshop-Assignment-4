@@ -1,3 +1,5 @@
 export { Navbar } from './Navbar/Navbar';
 export { ProfileCard } from './ProfileCard/ProfileCard';
-export { InfoContainer } from './InfoContainer/InfoContainer';
+export { ConnectButton } from './ConnectButton/ConnectButton';
+export { EmailButton } from './EmailButton/EmailButton';
+export { IconButton } from './IconButton/IconButton';

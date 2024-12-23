@@ -1,6 +1,6 @@
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import NavbarStyles from './Navbar.module.css';
 import { MyID } from '../../Definitions';
+import NavbarStyles from './Navbar.module.css';
 
 export function Navbar() {
     return (

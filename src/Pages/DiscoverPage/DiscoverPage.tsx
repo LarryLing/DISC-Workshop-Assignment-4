@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { ProfileCard } from "../../Components";
 import { User } from "../../Types";
-import DiscoverPageStyles from './DiscoverPage.module.css';
 import { MyID } from "../../Definitions";
+import DiscoverPageStyles from './DiscoverPage.module.css';
 
 interface Props {
     connections : User[];

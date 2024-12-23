@@ -4,7 +4,7 @@ interface Props {
     email : string;
 }
 
-export default function EmailButton({ email } : Props) {
+export function EmailButton({ email } : Props) {
     function handleClick() {
         navigator.clipboard.writeText(email);
         // TODO: Add toaster pop-up when user copies email
