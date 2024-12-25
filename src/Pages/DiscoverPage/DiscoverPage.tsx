@@ -4,12 +4,7 @@ import { User } from "../../Types";
 import { MyID } from "../../Definitions";
 import DiscoverPageStyles from './DiscoverPage.module.css';
 
-interface Props {
-    connections : User[];
-    setConnections : (arg0 : User[]) => void;
-}
-
-export function DiscoverPage({ connections, setConnections } : Props) {
+export function DiscoverPage() {
     const [errorOccured, setErrorOccured] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [fetchedUsers, setFetchedUsers] = useState<User[]>([]);
@@ -54,9 +49,7 @@ export function DiscoverPage({ connections, setConnections } : Props) {
                     <ProfileCard
                         key={ fetchedUser.id } 
                         user={ fetchedUser }
-                        backgroundURL="https://i.imgur.com/Ddu7o5o.jpeg"
-                        connections={ connections }
-                        setConnections={ setConnections }/>
+                        backgroundURL="https://i.imgur.com/Ddu7o5o.jpeg"/>
                 )
             })}
         </div>

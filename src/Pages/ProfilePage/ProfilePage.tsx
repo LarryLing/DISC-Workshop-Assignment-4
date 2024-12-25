@@ -5,12 +5,7 @@ import { MyID } from '../../Definitions';
 import { ConnectButton, EmailButton, IconButton } from '../../Components';
 import ProfilePageStyles from './ProfilePage.module.css';
 
-interface Props {
-    connections : User[];
-    setConnections : (arg0 : User[]) => void;
-}
-
-export function ProfilePage({ connections, setConnections } : Props) {
+export function ProfilePage() {
     const id = useParams().id;
     const [errorOccured, setErrorOccured] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +78,7 @@ export function ProfilePage({ connections, setConnections } : Props) {
                     </div>
                 </div>
                 { !isUser && <div className={ ProfilePageStyles.buttonContainer}>
-                                <ConnectButton user={ fetchedUser } connections={ connections } setConnections={ setConnections }/>
+                                <ConnectButton user={ fetchedUser }/>
                                 <EmailButton email={ fetchedUser.email }/>
                             </div> }
                 <InfoContainer title="Bio" info={ fetchedUser.bio }/>

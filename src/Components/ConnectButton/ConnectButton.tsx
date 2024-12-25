@@ -1,15 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { User } from '../../Types';
+import { UserConnectionsContext } from '../../App';
 import ConnectButtonStyles from './ConnectButton.module.css';
 
 interface Props {
     user : User;
-    connections : User[];
-    setConnections : (arg0 : User[]) => void;
+    // connections : User[];
+    // setConnections : (arg0 : User[]) => void;
 }
 
-export function ConnectButton({ user, connections, setConnections } : Props) {
-    // TODO: use useContext hook for connections and setConnections to fix prop drilling
+export function ConnectButton({ user } : Props) {
+    const currentUserConnectionsContext = useContext(UserConnectionsContext);
+
+    if (!currentUserConnectionsContext) throw new Error("UserConnectionsContext is undefined!");
+
+    const connections = currentUserConnectionsContext.connections;
+    const setConnections = currentUserConnectionsContext.setConnections;
 
     const [isConnected, setIsConnected] = useState(false);
 

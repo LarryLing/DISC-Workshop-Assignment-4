@@ -1,23 +1,26 @@
-import { useState } from 'react'
+import { createContext, useState } from 'react'
 import { Navbar } from './Components';
-import { User } from './Types';
+import { User, UserConnectionsContextType } from './Types';
 import { DiscoverPage, HomePage, ProfilePage } from './Pages';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
+export const UserConnectionsContext = createContext<UserConnectionsContextType | undefined>(undefined);
+
 function App() {
-    // TODO: change connections so that it is a dictionary-like object to optimize lookup times
     const [connections, setConnections] = useState<User[]>([]);
 
     return (
         <>
             <Navbar/>
             <div className="content">
-                <Routes>
-                    <Route path="/" element={ <HomePage/> }/>
-                    <Route path='/discover' element={ <DiscoverPage connections={ connections } setConnections={ setConnections }/> }/>
-                    <Route path='/user/:id' element={ <ProfilePage connections={ connections } setConnections={ setConnections }/> }/>
-                </Routes>
+                <UserConnectionsContext.Provider value={{ connections, setConnections }}>
+                    <Routes>
+                        <Route path="/" element={ <HomePage/> }/>
+                        <Route path='/discover' element={ <DiscoverPage/> }/>
+                        <Route path='/user/:id' element={ <ProfilePage/> }/>
+                    </Routes>
+                </UserConnectionsContext.Provider>
             </div>
         </>
     )
