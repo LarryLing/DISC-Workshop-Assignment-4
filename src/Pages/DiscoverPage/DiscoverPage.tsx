@@ -1,38 +1,10 @@
-import { useEffect, useState } from "react";
 import { ProfileCard } from "../../Components";
-import { User } from "../../Types";
 import { MyID } from "../../Definitions";
+import { useFetchUsers } from "../../Hooks";
 import DiscoverPageStyles from './DiscoverPage.module.css';
 
 export function DiscoverPage() {
-    const [errorOccured, setErrorOccured] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [fetchedUsers, setFetchedUsers] = useState<User[]>([]);
-
-    useEffect(() => {
-        async function fetchUsers() {
-            setIsLoading(true);
-
-            try {
-                const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users");
-
-                if (response.ok) {
-                    const parsedResponse = (await response.json()) as User[];
-                    setFetchedUsers(parsedResponse);
-                }
-                else {
-                    setFetchedUsers([]);
-                    setErrorOccured(true);
-                }
-            } catch {
-                setErrorOccured(true);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchUsers();
-    }, [])
+    const { errorOccured, isLoading, fetchedUsers } = useFetchUsers();
 
     if (isLoading) {
         return <div>Loading...</div>;

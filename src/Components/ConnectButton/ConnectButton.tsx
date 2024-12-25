@@ -5,8 +5,6 @@ import ConnectButtonStyles from './ConnectButton.module.css';
 
 interface Props {
     user : User;
-    // connections : User[];
-    // setConnections : (arg0 : User[]) => void;
 }
 
 export function ConnectButton({ user } : Props) {
@@ -18,6 +16,12 @@ export function ConnectButton({ user } : Props) {
     const setConnections = currentUserConnectionsContext.setConnections;
 
     const [isConnected, setIsConnected] = useState(false);
+
+    useEffect(() => {
+        if (connections.some(connection => connection.id === user.id)) {
+            setIsConnected(true);
+        }
+    }, [])
 
     function handleClick() {
         if (!isConnected) {
@@ -33,12 +37,6 @@ export function ConnectButton({ user } : Props) {
 
         setIsConnected(!isConnected);
     }
-
-    useEffect(() => {
-        if (connections.some(connection => connection.id === user.id)) {
-            setIsConnected(true);
-        }
-    }, [])
 
     return (
         <button

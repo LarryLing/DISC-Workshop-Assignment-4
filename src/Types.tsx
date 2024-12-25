@@ -10,7 +10,7 @@ export type User = {
     profilepicture : string;
 }
 
-export type userConnectionsContextType = {
+export type UserConnectionsContextType = {
     connections : User[];
     setConnections : (arg0 : User[]) => void;
 }
