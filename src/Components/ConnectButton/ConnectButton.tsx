@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { User } from '../../Types';
-import { UserConnectionsContext } from '../../App';
+import { useConnections } from '../../Hooks';
 import ConnectButtonStyles from './ConnectButton.module.css';
 
 interface Props {
@@ -8,29 +8,21 @@ interface Props {
 }
 
 export function ConnectButton({ user } : Props) {
-    const currentUserConnectionsContext = useContext(UserConnectionsContext);
-
-    if (!currentUserConnectionsContext) throw new Error("UserConnectionsContext is undefined!");
-
-    const connections = currentUserConnectionsContext.connections;
-    const setConnections = currentUserConnectionsContext.setConnections;
-
+    const { connections, setConnections } = useConnections();
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
-        if (connections.some(connection => connection.id === user.id)) {
-            setIsConnected(true);
-        }
+        if (connections.some(connection => connection === user.id)) setIsConnected(true);
     }, [])
 
     function handleClick() {
         if (!isConnected) {
-            const updatedConnections = [...connections, user];
+            const updatedConnections = [...connections, user.id];
 
             setConnections(updatedConnections);
         }
         else {
-            const updatedProfiles = connections.filter(filteredUser => filteredUser.id !== user.id);
+            const updatedProfiles = connections.filter(connection => connection !== user.id);
 
             setConnections(updatedProfiles);
         }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { User } from '../Types';
+import { MyID } from '../Definitions';
 
 export function useFetchUsers() {
     const [errorOccured, setErrorOccured] = useState(false);
@@ -15,10 +16,9 @@ export function useFetchUsers() {
 
                 if (response.ok) {
                     const parsedResponse = (await response.json()) as User[];
-                    setFetchedUsers(parsedResponse);
+                    setFetchedUsers(parsedResponse.filter(fetchedUser => fetchedUser.id !== MyID));
                 }
                 else {
-                    setFetchedUsers([]);
                     setErrorOccured(true);
                 }
             } catch {
@@ -26,7 +26,7 @@ export function useFetchUsers() {
             } finally {
                 setIsLoading(false);
             }
-        }
+        }    
 
         fetchUsers();
     }, [])

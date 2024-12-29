@@ -11,6 +11,6 @@ export type User = {
 }
 
 export type UserConnectionsContextType = {
-    connections : User[];
-    setConnections : (arg0 : User[]) => void;
+    connections : number[];
+    setConnections : (arg0 : number[]) => void;
 }

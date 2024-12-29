@@ -5,10 +5,12 @@ import ProfileCardStyles from './ProfileCard.module.css';
 
 interface Props {
     user : User;
-    backgroundURL : string;
 }
 
-export function ProfileCard({ user, backgroundURL } : Props) {
+export function ProfileCard({ user } : Props) {
+    // TODO: make api call to get respective backgroundURL
+    const backgroundURL = "https://i.imgur.com/Ddu7o5o.jpeg";
+
     return (
         <div className={ ProfileCardStyles.profileCard }>
             <Link to={`/user/${ user.id }`} className={ ProfileCardStyles.clickableContainer }>

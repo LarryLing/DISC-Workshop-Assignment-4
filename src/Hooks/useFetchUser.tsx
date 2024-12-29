@@ -22,7 +22,6 @@ export function useFetchUser(id : string | undefined) {
                     // TODO: Use local storage to hold individual user's id
                 }
                 else {
-                    setFetchedUser(undefined);
                     setErrorOccured(true);
                 }
             } catch {

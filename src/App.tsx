@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react'
 import { Navbar } from './Components';
-import { User, UserConnectionsContextType } from './Types';
+import { UserConnectionsContextType } from './Types';
 import { DiscoverPage, HomePage, ProfilePage } from './Pages';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -8,7 +8,7 @@ import './App.css';
 export const UserConnectionsContext = createContext<UserConnectionsContextType | undefined>(undefined);
 
 function App() {
-    const [connections, setConnections] = useState<User[]>([]);
+    const [connections, setConnections] = useState<number[]>([]);
 
     return (
         <>
