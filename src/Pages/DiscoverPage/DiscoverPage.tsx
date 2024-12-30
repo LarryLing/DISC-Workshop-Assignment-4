@@ -1,9 +1,8 @@
 import { ProfileCard } from "../../Components";
-import { useConnections, useFetchUsers } from "../../Hooks";
+import { useFetchUsers } from "../../Hooks";
 import DiscoverPageStyles from './DiscoverPage.module.css';
 
 export function DiscoverPage() {
-    const { connections } = useConnections();
     const { errorOccured, isLoading, fetchedUsers, fetchedProfiles } = useFetchUsers();
 
     if (isLoading) {

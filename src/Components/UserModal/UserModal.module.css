@@ -1,0 +1,18 @@
+.userModal {
+    position: absolute;
+
+    background: white;
+
+    padding: var(--padding);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    min-width: 400px;
+    min-height: 300px;
+}
+
+.contactInfoItem {
+
+}
