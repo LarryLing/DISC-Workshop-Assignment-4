@@ -1,13 +1,23 @@
 export type User = {
     id : number;
-    firstname : string;
-    lastname : string;
+    first_name : string;
+    last_name : string;
     email : string;
-    bio : string;
+    phone_number : string;
+    hometown : string;
+}
+
+export type UserProfile = {
+    id : number;
+    user_id : number;
+    profile_picture : string;
+    background_picture : string;
     major : string;
-    graduationyear : number;
+    graduation_year : number;
+    bio : string;
+    date_of_birth : string;
+    pronouns : string;
     created_at : string;
-    profilepicture : string;
 }
 
 export type UserConnectionsContextType = {

@@ -13,7 +13,7 @@ export function useFetchUser(id : string | undefined) {
             setIsLoading(true);
 
             try {
-                const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users/" + id);
+                const response = await fetch("http://localhost:3009/api/users/" + id);
 
                 if (response.ok) {
                     const parsedResponse = (await response.json()) as User;

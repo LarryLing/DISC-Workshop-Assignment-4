@@ -19,8 +19,13 @@ export function ProfilePage() {
         return <div>Tried to display an undefined user!</div>;
     }
 
-    // TODO: make api call to get respective backgroundURL
+    // TODO: replace these explicit definitions of attributes with API call
     const backgroundURL = "https://i.imgur.com/Ddu7o5o.jpeg";
+    const profileURL = "https://i.imgur.com/O9Wmyek.jpeg";
+    const graduation_year = 2027;
+    const major = "Computer Science";
+    const created_at = "Oct 10, 2024";
+    const bio = "Hello World";
 
     return (
         <div className={ ProfilePageStyles.profile }>
@@ -28,33 +33,33 @@ export function ProfilePage() {
                 <img src={ backgroundURL } alt="background image"/>
             </div>
             <div className={ ProfilePageStyles.profilePicture }>
-                <img src={ fetchedUser.profilepicture } alt="profile picture"/>
+                <img src={ profileURL } alt="profile picture"/>
             </div>
             { isUser && <IconButton children="Edit"/> }
             <div className={ ProfilePageStyles.userInfo}>
                 <div className={ ProfilePageStyles.basicInfo }>
                     <div>
                         <h3>Name</h3>
-                        <p>{ fetchedUser.firstname + " " + fetchedUser.lastname }</p>
+                        <p>{ fetchedUser.first_name + " " + fetchedUser.last_name }</p>
                     </div>
                     <div>
                         <h3>Major</h3>
-                        <p>{ fetchedUser.major }</p>
+                        <p>{ major }</p>
                     </div>
                     <div>
                         <h3>Graduation Year</h3>
-                        <p>{ fetchedUser.graduationyear }</p>
+                        <p>{ graduation_year }</p>
                     </div>
                 </div>
                 { !isUser && <div className={ ProfilePageStyles.buttonContainer}>
                                 <ConnectButton user={ fetchedUser }/>
                                 <EmailButton email={ fetchedUser.email }/>
                             </div> }
-                <InfoContainer title="Bio" info={ fetchedUser.bio }/>
+                <InfoContainer title="Bio" info={ bio }/>
                 <div className={ ProfilePageStyles.dateJoined }>
                     <div>
                         <h3>Date Joined</h3>
-                        <p>{ GetDate(fetchedUser.created_at) }</p>
+                        <p>{ created_at }</p>
                     </div>
                 </div>
             </div>

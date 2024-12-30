@@ -8,8 +8,12 @@ interface Props {
 }
 
 export function ProfileCard({ user } : Props) {
-    // TODO: make api call to get respective backgroundURL
+    // TODO: replace these explicit definitions of attributes with API call
     const backgroundURL = "https://i.imgur.com/Ddu7o5o.jpeg";
+    const profileURL = "https://i.imgur.com/O9Wmyek.jpeg";
+    const graduation_year = 2027;
+    const major = "Computer Science";
+    const bio = "Hello World";
 
     return (
         <div className={ ProfileCardStyles.profileCard }>
@@ -18,12 +22,12 @@ export function ProfileCard({ user } : Props) {
                     <img src={ backgroundURL } alt="background image"/>
                 </div>
                 <div className={ ProfileCardStyles.profilePicture }>
-                    <img src={ user.profilepicture } alt="profile picture"/>
+                    <img src={ profileURL } alt="profile picture"/>
                 </div>
                 <div className={ ProfileCardStyles.text }>
-                    <h3>{ `${ user.firstname } ${ user.lastname }` }</h3>
-                    <p>{ user.major + " • " + user.graduationyear }</p>
-                    <p>{ user.bio }</p>
+                    <h3>{ `${ user.first_name } ${ user.last_name }` }</h3>
+                    <p>{ major + " • " + graduation_year }</p>
+                    <p>{ bio }</p>
                 </div>
             </Link>
             <div className={ ProfileCardStyles.buttonContainer }>
