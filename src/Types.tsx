@@ -1,5 +1,5 @@
 export type User = {
-    id : number;
+    user_id : number;
     first_name : string;
     last_name : string;
     email : string;
@@ -8,16 +8,16 @@ export type User = {
 }
 
 export type UserProfile = {
-    id : number;
     user_id : number;
-    profile_picture : string;
-    background_picture : string;
+    profile_url : string;
+    background_url : string;
     major : string;
-    graduation_year : number;
+    class_of : number;
     bio : string;
     date_of_birth : string;
     pronouns : string;
     created_at : string;
+    connections : number[];
 }
 
 export type UserConnectionsContextType = {

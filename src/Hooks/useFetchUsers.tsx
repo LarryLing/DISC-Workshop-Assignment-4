@@ -1,22 +1,37 @@
 import { useEffect, useState } from 'react'
-import { User } from '../Types';
+import { User, UserProfile } from '../Types';
 import { MyID } from '../Definitions';
 
 export function useFetchUsers() {
     const [errorOccured, setErrorOccured] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [fetchedUsers, setFetchedUsers] = useState<User[]>([]);
+    const [fetchedProfiles, setFetchedProfiles] = useState<UserProfile[]>([]);
 
     useEffect(() => {
-        async function fetchUsers() {
+        async function fetchUsersAndProfiles() {
             setIsLoading(true);
 
             try {
-                const response = await fetch("http://localhost:3009/api/users");
+                const usersPromise = fetch("http://localhost:3009/api/users");
+                const profilesPromise = fetch("http://localhost:3009/api/user_profiles");
 
-                if (response.ok) {
-                    const parsedResponse = (await response.json()) as User[];
-                    setFetchedUsers(parsedResponse.filter(fetchedUser => fetchedUser.id !== MyID));
+                const responses = await Promise.all([usersPromise, profilesPromise]);
+
+                const usersResponse = responses[0];
+                const profilesResponse = responses[1]; 
+
+                if (usersResponse.ok) {
+                    const users = (await usersResponse.json()) as User[];
+                    setFetchedUsers(users.filter(user => user.user_id !== MyID));
+                }
+                else {
+                    setErrorOccured(true);
+                }
+
+                if (profilesResponse.ok) {
+                    const profiles = (await profilesResponse.json()) as UserProfile[];
+                    setFetchedProfiles(profiles.filter(profile => profile.user_id !== MyID));
                 }
                 else {
                     setErrorOccured(true);
@@ -28,8 +43,8 @@ export function useFetchUsers() {
             }
         }    
 
-        fetchUsers();
+        fetchUsersAndProfiles();
     }, [])
         
-    return { errorOccured, isLoading, fetchedUsers }
+    return { errorOccured, isLoading, fetchedUsers, fetchedProfiles }
 }

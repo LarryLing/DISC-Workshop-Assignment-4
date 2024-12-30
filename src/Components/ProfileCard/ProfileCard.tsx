@@ -1,32 +1,29 @@
-import { User } from '../../Types';
+import { User, UserProfile } from '../../Types';
 import { Link } from 'react-router-dom';
 import { ConnectButton } from '../';
 import ProfileCardStyles from './ProfileCard.module.css';
 
 interface Props {
     user : User;
+    profile : UserProfile;
 }
 
-export function ProfileCard({ user } : Props) {
-    // TODO: replace these explicit definitions of attributes with API call
-    const backgroundURL = "https://i.imgur.com/Ddu7o5o.jpeg";
-    const profileURL = "https://i.imgur.com/O9Wmyek.jpeg";
-    const graduation_year = 2027;
-    const major = "Computer Science";
-    const bio = "Hello World";
+export function ProfileCard({ user, profile } : Props) {
+    const { first_name, last_name } = user;
+    const { profile_url, background_url, major, class_of, bio } = profile;
 
     return (
         <div className={ ProfileCardStyles.profileCard }>
-            <Link to={`/user/${ user.id }`} className={ ProfileCardStyles.clickableContainer }>
+            <Link to={`/user/${ user.user_id }`} className={ ProfileCardStyles.clickableContainer }>
                 <div className={ ProfileCardStyles.background }>
-                    <img src={ backgroundURL } alt="background image"/>
+                    <img src={ background_url } alt="background image"/>
                 </div>
                 <div className={ ProfileCardStyles.profilePicture }>
-                    <img src={ profileURL } alt="profile picture"/>
+                    <img src={ profile_url } alt="profile picture"/>
                 </div>
                 <div className={ ProfileCardStyles.text }>
-                    <h3>{ `${ user.first_name } ${ user.last_name }` }</h3>
-                    <p>{ major + " • " + graduation_year }</p>
+                    <h3>{ `${ first_name } ${ last_name }` }</h3>
+                    <p>{ major + " • " + class_of }</p>
                     <p>{ bio }</p>
                 </div>
             </Link>

@@ -5,7 +5,7 @@ import ProfilePageStyles from './ProfilePage.module.css';
 
 export function ProfilePage() {
     const id = useParams().id;
-    const { errorOccured, isLoading, isUser, fetchedUser } = useFetchUser(id);
+    const { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile } = useFetchUser(id);
 
     if (isLoading) {
         return <div>Loading...</div>
@@ -19,36 +19,35 @@ export function ProfilePage() {
         return <div>Tried to display an undefined user!</div>;
     }
 
-    // TODO: replace these explicit definitions of attributes with API call
-    const backgroundURL = "https://i.imgur.com/Ddu7o5o.jpeg";
-    const profileURL = "https://i.imgur.com/O9Wmyek.jpeg";
-    const graduation_year = 2027;
-    const major = "Computer Science";
-    const created_at = "Oct 10, 2024";
-    const bio = "Hello World";
+    if (!fetchedProfile) {
+        return <div>Tried do display an undefined profile!</div>;
+    }
+
+    const { first_name, last_name, email, phone_number, hometown } = fetchedUser;
+    const { profile_url, background_url, major, class_of, bio, date_of_birth, pronouns, created_at, connections } = fetchedProfile;
 
     return (
         <div className={ ProfilePageStyles.profile }>
             <div className={ ProfilePageStyles.background }>
-                <img src={ backgroundURL } alt="background image"/>
+                <img src={ background_url } alt="background image"/>
             </div>
             <div className={ ProfilePageStyles.profilePicture }>
-                <img src={ profileURL } alt="profile picture"/>
+                <img src={ profile_url } alt="profile picture"/>
             </div>
             { isUser && <IconButton children="Edit"/> }
             <div className={ ProfilePageStyles.userInfo}>
                 <div className={ ProfilePageStyles.basicInfo }>
                     <div>
                         <h3>Name</h3>
-                        <p>{ fetchedUser.first_name + " " + fetchedUser.last_name }</p>
+                        <p>{ first_name + " " + last_name }</p>
                     </div>
                     <div>
                         <h3>Major</h3>
                         <p>{ major }</p>
                     </div>
                     <div>
-                        <h3>Graduation Year</h3>
-                        <p>{ graduation_year }</p>
+                        <h3>Class Of</h3>
+                        <p>{ class_of }</p>
                     </div>
                 </div>
                 { !isUser && <div className={ ProfilePageStyles.buttonContainer}>
@@ -59,7 +58,7 @@ export function ProfilePage() {
                 <div className={ ProfilePageStyles.dateJoined }>
                     <div>
                         <h3>Date Joined</h3>
-                        <p>{ created_at }</p>
+                        <p>{ GetDate(created_at) }</p>
                     </div>
                 </div>
             </div>
