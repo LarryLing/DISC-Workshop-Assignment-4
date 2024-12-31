@@ -1,13 +1,14 @@
 import { useParams } from 'react-router-dom';
-import { DetailedProfile, UserModal } from '../../Components';
+import { DetailedProfile, EditProfileModal, UserContactsModal } from '../../Components';
 import { useFetchUser } from '../../Hooks';
-import { useState } from 'react';
+import { useModal } from '../../Hooks/useModal';
 import ProfilePageStyles from './ProfilePage.module.css';
 
 export function ProfilePage() {
     const id = useParams().id;
     const { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile } = useFetchUser(id);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const userContactsModalHook = useModal();
+    const editProfileModalHook = useModal();
 
     if (isLoading) {
         return <div>Loading...</div>
@@ -27,8 +28,9 @@ export function ProfilePage() {
 
     return (
         <div className={ ProfilePageStyles.profilePage }>
-            <DetailedProfile user={ fetchedUser } profile={ fetchedProfile } isUser={ isUser } isModalOpen={ isModalOpen } setIsModalOpen={ setIsModalOpen }/>
-            { isModalOpen && <UserModal user={ fetchedUser } isModalOpen={ isModalOpen } setIsModalOpen={ setIsModalOpen }/> }
+            <DetailedProfile user={ fetchedUser } profile={ fetchedProfile } isUser={ isUser } openEditProfileModal={ editProfileModalHook.openModal } openContactInfoModal={ userContactsModalHook.openModal }/>
+            <EditProfileModal user={ fetchedUser } profile={ fetchedProfile } modalRef={ editProfileModalHook.modalRef } closeModal={ editProfileModalHook.closeModal }/>
+            <UserContactsModal user={ fetchedUser } modalRef={ userContactsModalHook.modalRef } closeModal={ userContactsModalHook.closeModal }/>
         </div>
     )
 }

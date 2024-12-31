@@ -1,4 +1,5 @@
-import { ConnectButton, ContactInfoButton, IconButton } from '../../Components';
+import { MouseEventHandler } from 'react';
+import { ConnectButton, IconButton } from '../../Components';
 import { User, UserProfile } from '../../Types';
 import ProfilePageStyles from './DetailedProfile.module.css';
 
@@ -6,17 +7,17 @@ interface Props {
     user : User;
     profile : UserProfile;
     isUser : boolean;
-    isModalOpen : boolean;
-    setIsModalOpen : (arg0 : boolean) => void;
+    openEditProfileModal : MouseEventHandler;
+    openContactInfoModal : MouseEventHandler;
 }
 
-export function DetailedProfile({ user, profile, isUser, isModalOpen, setIsModalOpen } : Props) {
+export function DetailedProfile({ user, profile, isUser, openEditProfileModal, openContactInfoModal } : Props) {
     const { first_name, last_name, hometown } = user;
     const { profile_url, background_url, major, class_of, bio, date_of_birth, pronouns, created_at, connections } = profile;
 
     return (
         <div className={ ProfilePageStyles.detailedProfile }>
-            { isUser && <IconButton clickHandler={ () => console.log("Clicked Edit") } children="Edit"/> }
+            { isUser && <IconButton onClick={ openEditProfileModal } children="Edit"/> }
             <div className={ ProfilePageStyles.background }>
                 <img src={ background_url } alt="background image"/>
             </div>
@@ -30,13 +31,12 @@ export function DetailedProfile({ user, profile, isUser, isModalOpen, setIsModal
                         <BasicInfoItem title="Major" info={ major }/>
                         <BasicInfoItem title="Class" info={ class_of }/>
                         <BasicInfoItem title="Connections" info={ connections.length }/>
-
                     </div>
                     <div className={ ProfilePageStyles.hometown }>{ hometown }</div>
                 </div>
                 <div className={ ProfilePageStyles.buttonContainer}>
                     { !isUser && <ConnectButton user={ user }/>}
-                    <ContactInfoButton isModalOpen={ isModalOpen } setIsModalOpen={ setIsModalOpen }/>
+                    <button onClick={ openContactInfoModal }>Contact Info</button>
                 </div>
                 <div className={ ProfilePageStyles.detailedInfoContainer}>
                     <DetailedInfoItem title="Bio" info={ bio }/>

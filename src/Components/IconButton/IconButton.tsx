@@ -1,13 +1,14 @@
+import { MouseEventHandler } from 'react';
 import IconButtonStyles from './IconButton.module.css';
 
 interface Props {
-    clickHandler : () => void;
+    onClick : MouseEventHandler;
     children : string
 }
 
-export function IconButton({ clickHandler, children } : Props) {
+export function IconButton({ onClick, children } : Props) {
     return (
-        <button onClick={ clickHandler } className={ IconButtonStyles.iconButton }>
+        <button onClick={ onClick } className={ IconButtonStyles.iconButton }>
             {children}
         </button>
     )

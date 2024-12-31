@@ -3,5 +3,6 @@ export { ProfileCard } from './ProfileCard/ProfileCard';
 export { DetailedProfile } from './DetailedProfile/DetailedProfile';
 export { ConnectButton } from './ConnectButton/ConnectButton';
 export { ContactInfoButton } from './ContactInfoButton/ContactInfoButton';
-export { UserModal } from './UserModal/UserModal';
+export { UserContactsModal } from './UserContactsModal/UserContactsModal';
+export { EditProfileModal } from './EditProfileModal/EditProfileModal';
 export { IconButton } from './IconButton/IconButton';
