@@ -1,4 +1,4 @@
-import { ConnectButton, IconButton } from '../../Components';
+import { ConnectButton, ContactInfoButton, IconButton } from '../../Components';
 import { User, UserProfile } from '../../Types';
 import ProfilePageStyles from './DetailedProfile.module.css';
 
@@ -16,13 +16,13 @@ export function DetailedProfile({ user, profile, isUser, isModalOpen, setIsModal
 
     return (
         <div className={ ProfilePageStyles.detailedProfile }>
+            { isUser && <IconButton clickHandler={ () => console.log("Clicked Edit") } children="Edit"/> }
             <div className={ ProfilePageStyles.background }>
                 <img src={ background_url } alt="background image"/>
             </div>
             <div className={ ProfilePageStyles.profilePicture }>
                 <img src={ profile_url } alt="profile picture"/>
             </div>
-            { isUser && <IconButton children="Edit"/> }
             <div className={ ProfilePageStyles.userInfo}>
                 <div className={ ProfilePageStyles.simpleInfoContainer }>
                     <div className={ ProfilePageStyles.basicInfoContainer }>
@@ -34,7 +34,7 @@ export function DetailedProfile({ user, profile, isUser, isModalOpen, setIsModal
                 </div>
                 <div className={ ProfilePageStyles.buttonContainer}>
                     { !isUser && <ConnectButton user={ user }/>}
-                    <button onClick={ () => setIsModalOpen(!isModalOpen) }>Contact Info</button>
+                    <ContactInfoButton isModalOpen={ isModalOpen } setIsModalOpen={ setIsModalOpen }/>
                 </div>
                 <div className={ ProfilePageStyles.detailedInfoContainer}>
                     <DetailedInfoItem title="Bio" info={ bio }/>

@@ -1,4 +1,4 @@
-.emailButton {
+.contactInfoButton {
     background: var(--purple);
     color: white;
     
@@ -17,10 +17,10 @@
     transition: all 0.3s;
 }
   
-.emailButton:hover {
+.contactInfoButton:hover {
     transform: translateY(-2px);
 }
 
-.emailButton:active {
+.contactInfoButton:active {
     transform: translateY(-1px);
 }

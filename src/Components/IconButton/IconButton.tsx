@@ -1,12 +1,13 @@
 import IconButtonStyles from './IconButton.module.css';
 
 interface Props {
+    clickHandler : () => void;
     children : string
 }
 
-export function IconButton({ children } : Props) {
+export function IconButton({ clickHandler, children } : Props) {
     return (
-        <button className={ IconButtonStyles.iconButton }>
+        <button onClick={ clickHandler } className={ IconButtonStyles.iconButton }>
             {children}
         </button>
     )

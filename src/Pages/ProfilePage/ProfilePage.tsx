@@ -28,7 +28,7 @@ export function ProfilePage() {
     return (
         <div className={ ProfilePageStyles.profilePage }>
             <DetailedProfile user={ fetchedUser } profile={ fetchedProfile } isUser={ isUser } isModalOpen={ isModalOpen } setIsModalOpen={ setIsModalOpen }/>
-            { isModalOpen && <UserModal user={ fetchedUser }/> }
+            { isModalOpen && <UserModal user={ fetchedUser } isModalOpen={ isModalOpen } setIsModalOpen={ setIsModalOpen }/> }
         </div>
     )
 }

@@ -1,18 +1,64 @@
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+dialog:focus {
+    outline: none;
+}
+
 .userModal {
-    position: absolute;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     background: white;
 
-    padding: var(--padding);
-
+    border: none;
     border-radius: var(--radius);
 
     box-shadow: var(--shadow);
 
-    min-width: 400px;
-    min-height: 300px;
+    width: 400px;
+    max-width: 100%;
+    height: 300px;
+    max-height: 100%;
+    
+    margin: 0;
+    padding: 0;
 }
 
-.contactInfoItem {
+.closeButton {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    
+    background: var(--yellow);
+    border: none;
+}
 
+.userModalTitle {
+    padding: var(--padding);
+
+    border-bottom: 1px solid;
+}
+
+.userModalContent {
+    padding: var(--padding);
+
+    width: 100%;
+
+    overflow: auto;
+}
+
+.userModalContent h3 {
+    font-weight: normal;
+}
+
+.userModalContent ul {
+    margin: 0;
+}
+
+.userModalContent ul > li {
+    margin-bottom: 4px;
 }
