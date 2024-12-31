@@ -28,7 +28,9 @@ export function DetailedProfile({ user, profile, isUser, isModalOpen, setIsModal
                     <div className={ ProfilePageStyles.basicInfoContainer }>
                         <BasicInfoItem title="Name" info={ first_name + " " + last_name }/>
                         <BasicInfoItem title="Major" info={ major }/>
-                        <BasicInfoItem title="Class of" info={ class_of }/>
+                        <BasicInfoItem title="Class" info={ class_of }/>
+                        <BasicInfoItem title="Connections" info={ connections.length }/>
+
                     </div>
                     <div className={ ProfilePageStyles.hometown }>{ hometown }</div>
                 </div>
@@ -39,11 +41,11 @@ export function DetailedProfile({ user, profile, isUser, isModalOpen, setIsModal
                 <div className={ ProfilePageStyles.detailedInfoContainer}>
                     <DetailedInfoItem title="Bio" info={ bio }/>
                     <DetailedInfoItem title="Pronouns" info={ pronouns }/>
-                    <DetailedInfoItem title="Date of Birth" info={ GetDate(date_of_birth) }/>
+                    <DetailedInfoItem title="Date of birth" info={ GetDate(date_of_birth) }/>
                 </div>
                 <div className={ ProfilePageStyles.dateJoined }>
                     <div>
-                        <h3>Date Joined</h3>
+                        <h3>Date joined</h3>
                         <p>{ GetDate(created_at) }</p>
                     </div>
                 </div>

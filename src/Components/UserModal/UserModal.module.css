@@ -31,7 +31,7 @@ dialog:focus {
 .closeButton {
     position: absolute;
     top: 8px;
-    right: 10px;
+    right: 8px;
     
     background: var(--yellow);
     border: none;
@@ -44,21 +44,22 @@ dialog:focus {
 }
 
 .userModalContent {
-    padding: var(--padding);
-
     width: 100%;
 
     overflow: auto;
 }
 
 .userModalContent h3 {
+    padding: var(--padding);
+
     font-weight: normal;
 }
 
 .userModalContent ul {
     margin: 0;
+    padding-right: var(--padding);
 }
 
 .userModalContent ul > li {
-    margin-bottom: 4px;
+    margin-bottom: calc(1/2 * var(--padding));
 }

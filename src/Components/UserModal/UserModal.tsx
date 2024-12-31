@@ -15,15 +15,10 @@ export function UserModal({ user, isModalOpen, setIsModalOpen } : Props) {
     function exitModal() {
         setIsModalOpen(false);
         modalRef.current?.close();
+        document.body.style.overflow = '';
     }
 
     useEffect(() => {
-        function handleClickOutside(event : MouseEvent) {
-            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-                exitModal();
-            }
-        }
-
         function handleKeyDown(event : KeyboardEvent) {
             if (modalRef.current && event.key === 'Escape') {
                 exitModal();
@@ -32,12 +27,11 @@ export function UserModal({ user, isModalOpen, setIsModalOpen } : Props) {
 
         if (isModalOpen) {
             modalRef.current?.showModal();
-            document.addEventListener('mousedown', handleClickOutside);
+            document.body.style.overflow = 'hidden';
             document.addEventListener('keydown', handleKeyDown);
         }
 
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
             document.removeEventListener('keydown', handleKeyDown);
         };
     }, [isModalOpen]);

@@ -18,7 +18,7 @@ h3 {
     box-shadow: var(--shadow);
 
     width: 60%;
-    min-width: 420px;
+    min-width: 500px;
 }
 
 .background {
@@ -93,7 +93,7 @@ h3 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: calc(4 * var(--padding));
+    gap: calc(3 * var(--padding));
 
     text-align: center;
 }
