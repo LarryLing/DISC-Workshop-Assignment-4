@@ -1,7 +1,7 @@
 
 import { MouseEventHandler, MutableRefObject } from 'react';
 import { User } from '../../Types';
-import { IconButton } from '../IconButton/IconButton';
+import { IconButton } from '../index';
 import ModalStyles from './UserContactsModal.module.css';
 
 interface Props {

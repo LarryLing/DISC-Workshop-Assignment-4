@@ -2,6 +2,7 @@ import { MouseEventHandler } from 'react';
 import { ConnectButton, IconButton } from '../../Components';
 import { User, UserProfile } from '../../Types';
 import ProfilePageStyles from './DetailedProfile.module.css';
+import { GetDisplayDate } from '../../Utilities';
 
 interface Props {
     user : User;
@@ -41,12 +42,12 @@ export function DetailedProfile({ user, profile, isUser, openEditProfileModal, o
                 <div className={ ProfilePageStyles.detailedInfoContainer}>
                     <DetailedInfoItem title="Bio" info={ bio }/>
                     <DetailedInfoItem title="Pronouns" info={ pronouns }/>
-                    <DetailedInfoItem title="Date of birth" info={ GetDate(date_of_birth) }/>
+                    <DetailedInfoItem title="Date of birth" info={ GetDisplayDate(date_of_birth) }/>
                 </div>
                 <div className={ ProfilePageStyles.dateJoined }>
                     <div>
                         <h3>Date joined</h3>
-                        <p>{ GetDate(created_at) }</p>
+                        <p>{ GetDisplayDate(created_at) }</p>
                     </div>
                 </div>
             </div>
@@ -80,14 +81,4 @@ function DetailedInfoItem({ title, info } : DetailedInfoItemProps) {
             <p>{ info }</p>
         </div>
     )
-}
-
-function GetDate(datetime : string) {
-    const monthNames = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-    ];
-
-    const date = new Date(datetime);
-
-    return `${ monthNames[date.getMonth()] } ${ date.getDate() }, ${ date.getFullYear() }`;
 }

@@ -1,6 +1,6 @@
 import { User, UserProfile } from '../../Types';
 import { Link } from 'react-router-dom';
-import { ConnectButton } from '../';
+import { ConnectButton } from '../index';
 import ProfileCardStyles from './ProfileCard.module.css';
 
 interface Props {
