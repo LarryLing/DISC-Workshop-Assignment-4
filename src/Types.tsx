@@ -20,6 +20,21 @@ export type UserProfile = {
     connections : number[];
 }
 
+export type ModalHookType = {
+    modalRef : React.MutableRefObject<HTMLDialogElement | null>;
+    openModal : () => void;
+    closeModal : () => void;
+}
+
+export type FetchUserType = {
+    errorOccured : boolean,
+    isLoading : boolean,
+    isUser : boolean,
+    fetchedUser : User | null;
+    fetchedProfile : UserProfile | null;
+    fetchUserAndProfile : () => Promise<void>;
+}
+
 export type UserConnectionsContextType = {
     connections : number[];
     setConnections : (arg0 : number[]) => void;

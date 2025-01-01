@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { User, UserProfile } from '../Types';
+import { FetchUserHookType, User, UserProfile } from '../Types';
 import { MyID } from '../Definitions';
 
 export function useFetchUser(user_id : string | undefined) {
@@ -9,45 +9,45 @@ export function useFetchUser(user_id : string | undefined) {
     const [fetchedUser, setFetchedUser] = useState<User | undefined>(undefined);
     const [fetchedProfile, setFetchedProfile] = useState<UserProfile | undefined>(undefined);
 
-    useEffect(() => {
-        async function fetchUserAndProfile() {
-            setIsLoading(true);
+    async function fetchUserAndProfile() {
+        setIsLoading(true);
 
-            try {
-                const userPromise = fetch("http://localhost:3009/api/users/" + user_id);
-                const profilePromise = fetch("http://localhost:3009/api/user_profiles/" + user_id);
+        try {
+            const userPromise = fetch("http://localhost:3009/api/users/" + user_id);
+            const profilePromise = fetch("http://localhost:3009/api/user_profiles/" + user_id);
 
-                const responses = await Promise.all([userPromise, profilePromise]);
+            const responses = await Promise.all([userPromise, profilePromise]);
 
-                const userResponse = responses[0];
-                const profileResponse = responses[1];
+            const userResponse = responses[0];
+            const profileResponse = responses[1];
 
-                if (userResponse.ok) {
-                    const user = (await userResponse.json()) as User;
-                    setFetchedUser(user);
-                    setIsUser(user.user_id === MyID)
-                    // TODO: Use local storage to hold individual user's id
-                }
-                else {
-                    setErrorOccured(true);
-                }
-
-                if (profileResponse.ok) {
-                    const profile = (await profileResponse.json()) as UserProfile;
-                    setFetchedProfile(profile);
-                }
-                else {
-                    setErrorOccured(true);
-                }
-            } catch {
-                setErrorOccured(true);
-            } finally {
-                setIsLoading(false);
+            if (userResponse.ok) {
+                const user = (await userResponse.json()) as User;
+                setFetchedUser(user);
+                setIsUser(user.user_id === MyID)
+                // TODO: Use local storage to hold individual user's id
             }
-        }
+            else {
+                setErrorOccured(true);
+            }
 
+            if (profileResponse.ok) {
+                const profile = (await profileResponse.json()) as UserProfile;
+                setFetchedProfile(profile);
+            }
+            else {
+                setErrorOccured(true);
+            }
+        } catch {
+            setErrorOccured(true);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
         fetchUserAndProfile();
     }, [user_id])
 
-    return { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile }
+    return { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile, fetchUserAndProfile } as FetchUserHookType;
 }

@@ -6,9 +6,11 @@ import ProfilePageStyles from './ProfilePage.module.css';
 
 export function ProfilePage() {
     const id = useParams().id;
-    const { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile } = useFetchUser(id);
-    const userContactsModalHook = useModal();
-    const editProfileModalHook = useModal();
+    const fetchUserHook= useFetchUser(id);
+    const userContactsModal = useModal();
+    const editProfileModal = useModal();
+
+    const { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile, fetchUserAndProfile } = fetchUserHook;
 
     if (isLoading) {
         return <div>Loading...</div>
@@ -28,9 +30,9 @@ export function ProfilePage() {
 
     return (
         <div className={ ProfilePageStyles.profilePage }>
-            <DetailedProfile user={ fetchedUser } profile={ fetchedProfile } isUser={ isUser } openEditProfileModal={ editProfileModalHook.openModal } openContactInfoModal={ userContactsModalHook.openModal }/>
-            <EditProfileModal user={ fetchedUser } profile={ fetchedProfile } modalRef={ editProfileModalHook.modalRef } closeModal={ editProfileModalHook.closeModal }/>
-            <UserContactsModal user={ fetchedUser } modalRef={ userContactsModalHook.modalRef } closeModal={ userContactsModalHook.closeModal }/>
+            <DetailedProfile user={ fetchedUser } profile={ fetchedProfile } isUser={ isUser } openEditProfileModal={ editProfileModal.openModal } openContactInfoModal={ userContactsModal.openModal }/>
+            <EditProfileModal user={ fetchedUser } profile={ fetchedProfile } modalHook={ editProfileModal } fetchUserAndProfile={ fetchUserAndProfile }/>
+            <UserContactsModal user={ fetchedUser } modalHook={ userContactsModal }/>
         </div>
     )
 }

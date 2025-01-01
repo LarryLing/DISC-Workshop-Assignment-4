@@ -1,8 +1,9 @@
 import { useRef } from "react";
+import { ModalHookType } from "../Types";
 
 export function useModal() {
     const modalRef = useRef<HTMLDialogElement | null>(null);
-    
+
     function handleKeyDown(event : KeyboardEvent) {
         if (modalRef.current && event.key === 'Escape') {
             closeModal();
@@ -21,5 +22,5 @@ export function useModal() {
         document.removeEventListener('keydown', handleKeyDown);
     }
 
-    return { modalRef, openModal, closeModal };
+    return { modalRef, openModal, closeModal } as ModalHookType;
 }

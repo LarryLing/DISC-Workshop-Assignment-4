@@ -1,17 +1,16 @@
 
-import { MouseEventHandler, MutableRefObject } from 'react';
-import { User } from '../../Types';
+import { ModalHookType, User } from '../../Types';
 import { IconButton } from '../index';
 import ModalStyles from './UserContactsModal.module.css';
 
 interface Props {
     user : User;
-    modalRef : MutableRefObject<HTMLDialogElement | null>;
-    closeModal : MouseEventHandler;
+    modalHook : ModalHookType;
 }
 
-export function UserContactsModal({ user, modalRef, closeModal } : Props) {
+export function UserContactsModal({ user, modalHook } : Props) {
     const { first_name, last_name, phone_number, email } = user;
+    const { modalRef, closeModal } = modalHook;
 
     return (
         <dialog ref={ modalRef } className={ ModalStyles.modal }>
