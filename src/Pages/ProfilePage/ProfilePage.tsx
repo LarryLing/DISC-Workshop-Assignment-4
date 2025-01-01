@@ -6,7 +6,7 @@ import ProfilePageStyles from './ProfilePage.module.css';
 
 export function ProfilePage() {
     const id = useParams().id;
-    const fetchUserHook= useFetchUser(id);
+    const fetchUserHook = useFetchUser(id);
     const userContactsModal = useModal();
     const editProfileModal = useModal();
 
@@ -31,7 +31,7 @@ export function ProfilePage() {
     return (
         <div className={ ProfilePageStyles.profilePage }>
             <DetailedProfile user={ fetchedUser } profile={ fetchedProfile } isUser={ isUser } openEditProfileModal={ editProfileModal.openModal } openContactInfoModal={ userContactsModal.openModal }/>
-            <EditProfileModal user={ fetchedUser } profile={ fetchedProfile } modalHook={ editProfileModal } fetchUserAndProfile={ fetchUserAndProfile }/>
+            <EditProfileModal user={ fetchedUser } profile={ fetchedProfile } fetchUserAndProfile={ fetchUserAndProfile } modalHook={ editProfileModal }/>
             <UserContactsModal user={ fetchedUser } modalHook={ userContactsModal }/>
         </div>
     )

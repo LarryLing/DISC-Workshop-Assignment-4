@@ -6,9 +6,11 @@ import ProfileCardStyles from './ProfileCard.module.css';
 interface Props {
     user : User;
     profile : UserProfile;
+    myProfile : UserProfile;
+    setMyProfile : React.Dispatch<React.SetStateAction<UserProfile | undefined>>
 }
 
-export function ProfileCard({ user, profile } : Props) {
+export function ProfileCard({ user, profile, myProfile, setMyProfile } : Props) {
     const { first_name, last_name } = user;
     const { profile_url, background_url, major, class_of, bio } = profile;
 
@@ -28,7 +30,7 @@ export function ProfileCard({ user, profile } : Props) {
                 </div>
             </Link>
             <div className={ ProfileCardStyles.buttonContainer }>
-                <ConnectButton user={ user }/>
+                <ConnectButton user={ user } myProfile={ myProfile } setMyProfile={ setMyProfile }/>
             </div>
         </div>
     )

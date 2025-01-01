@@ -1,33 +1,33 @@
-import { useEffect, useState } from 'react';
-import { User } from '../../Types';
-import { useConnections } from '../../Hooks';
+import { useState } from 'react';
+import { User, UserProfile } from '../../Types';
 import ConnectButtonStyles from './ConnectButton.module.css';
 
 interface Props {
     user : User;
+    myProfile : UserProfile;
+    setMyProfile : React.Dispatch<React.SetStateAction<UserProfile | undefined>>
 }
 
-export function ConnectButton({ user } : Props) {
-    const { connections, setConnections } = useConnections();
-    const [isConnected, setIsConnected] = useState(false);
+export function ConnectButton({ user, myProfile, setMyProfile } : Props) {
+    const { user_id } = user;
 
-    useEffect(() => {
-        if (connections.some(connection => connection === user.user_id)) setIsConnected(true);
-    }, [])
+    const [isConnected, setIsConnected] = useState(() => myProfile.connections.includes(user_id));
 
     function handleClick() {
         if (!isConnected) {
-            const updatedConnections = [...connections, user.user_id];
-
-            setConnections(updatedConnections);
+            setMyProfile({
+                ...myProfile,
+                connections : [...myProfile.connections, user_id]
+            })
         }
         else {
-            const updatedProfiles = connections.filter(connection => connection !== user.user_id);
-
-            setConnections(updatedProfiles);
+            setMyProfile({
+                ...myProfile,
+                connections : myProfile.connections.filter((connection: number) => connection !== user_id)
+            })
         }
 
-        setIsConnected(!isConnected);
+        setIsConnected(prev => !prev);
     }
 
     return (

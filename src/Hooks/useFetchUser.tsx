@@ -49,5 +49,5 @@ export function useFetchUser(user_id : string | undefined) {
         fetchUserAndProfile();
     }, [user_id])
 
-    return { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile, fetchUserAndProfile } as FetchUserHookType;
+    return { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile, setFetchedProfile, fetchUserAndProfile } as FetchUserHookType;
 }

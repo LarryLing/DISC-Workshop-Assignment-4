@@ -26,14 +26,14 @@ type FormFields = z.infer<typeof formSchema>;
 interface Props {
     user : User;
     profile : UserProfile;
-    modalHook : ModalHookType;
     fetchUserAndProfile : () => Promise<void>;
+    modalHook : ModalHookType;
 }
 
 export function EditProfileModal({ user, profile, modalHook, fetchUserAndProfile } : Props) {
+    const { modalRef, closeModal } = modalHook;
     const { user_id, first_name, last_name, phone_number, email, hometown } = user;
     const { profile_url, background_url, major, class_of, bio, date_of_birth, pronouns, created_at, connections } = profile;
-    const { modalRef, closeModal } = modalHook;
 
     const { register, handleSubmit, setError, formState : {  errors, isSubmitting } } = useForm<FormFields>({
         defaultValues: {
@@ -77,13 +77,13 @@ export function EditProfileModal({ user, profile, modalHook, fetchUserAndProfile
         }
     
         try {
-            const updatedUserRequestOptions= {
+            const updatedUserRequestOptions = {
                 method : "PUT",
                 headers : { 
-                    'Accept': 'application/json',
+                    "Accept" : 'application/json',
                     "Content-Type" : "application/json" 
                 },
-                body: JSON.stringify(updatedUser)
+                body : JSON.stringify(updatedUser)
             }   
     
             const updatedProfileRequestOptions= {

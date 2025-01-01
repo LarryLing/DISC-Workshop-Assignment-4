@@ -26,12 +26,13 @@ export type ModalHookType = {
     closeModal : () => void;
 }
 
-export type FetchUserType = {
+export type FetchUserHookType = {
     errorOccured : boolean,
     isLoading : boolean,
     isUser : boolean,
     fetchedUser : User | null;
     fetchedProfile : UserProfile | null;
+    setFetchedProfile : React.Dispatch<React.SetStateAction<UserProfile | undefined>>
     fetchUserAndProfile : () => Promise<void>;
 }
 
