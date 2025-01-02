@@ -14,7 +14,6 @@ export function Navbar() {
             <ul className={ NavbarStyles.linkContainer }>
                 <NavbarLink to='/' children="Home"/>
                 <NavbarLink to='/discover' children="Discover"/>
-                <NavbarLink to='/messages' children="Messages"/>
                 <NavbarLink to={`/user/${ MyID }`} children="My Profile"/>
             </ul>
         </nav>

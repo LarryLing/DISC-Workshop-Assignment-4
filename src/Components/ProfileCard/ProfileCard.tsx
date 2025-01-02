@@ -2,15 +2,14 @@ import { User, UserProfile } from '../../Types';
 import { Link } from 'react-router-dom';
 import { ConnectButton } from '../index';
 import ProfileCardStyles from './ProfileCard.module.css';
+import { memo } from 'react';
 
 interface Props {
     user : User;
     profile : UserProfile;
-    myProfile : UserProfile;
-    setMyProfile : React.Dispatch<React.SetStateAction<UserProfile | undefined>>
 }
 
-export function ProfileCard({ user, profile, myProfile, setMyProfile } : Props) {
+export function ProfileCard({ user, profile } : Props) {
     const { first_name, last_name } = user;
     const { profile_url, background_url, major, class_of, bio } = profile;
 
@@ -30,8 +29,23 @@ export function ProfileCard({ user, profile, myProfile, setMyProfile } : Props) 
                 </div>
             </Link>
             <div className={ ProfileCardStyles.buttonContainer }>
-                <ConnectButton user={ user } myProfile={ myProfile } setMyProfile={ setMyProfile }/>
+                <ConnectButton user={ user }/>
             </div>
         </div>
     )
 }
+
+function arePropsEqual(prevProps : Props, nextProps : Props) {
+    return (
+        prevProps.user.first_name === nextProps.user.first_name &&
+        prevProps.user.last_name === nextProps.user.last_name &&
+        prevProps.profile.profile_url === nextProps.profile.profile_url &&
+        prevProps.profile.background_url === nextProps.profile.background_url &&
+        prevProps.profile.major === nextProps.profile.major &&
+        prevProps.profile.class_of === nextProps.profile.class_of &&
+        prevProps.profile.bio === nextProps.profile.bio
+    )
+}
+
+export const MemoProfileCard = memo(ProfileCard, arePropsEqual); 
+
