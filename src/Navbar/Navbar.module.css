@@ -1,0 +1,73 @@
+.navbar {
+    background: var(--purple);
+    color: #fff;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 60px;
+    width: 100%;
+}
+  
+.titleSearch {
+    flex: 1;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: inherit;
+}
+  
+.title {
+    padding: 0px var(--padding);
+}
+  
+.searchBar {
+    flex: auto;
+    
+    background: #fff;
+    color: var(--search-text);
+    
+    margin: 0px var(--layout-spacing);
+    padding: var(--padding);
+    
+    border: none;
+    border-radius: var(--radius);
+    
+    max-width: 280px;
+}
+  
+.buttonContainer {
+    flex: 1;
+    
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    height: inherit;
+}
+  
+.headerButton {
+    background: var(--purple);
+    color: inherit;
+
+    border: transparent;
+    
+    height: inherit;
+    
+    padding: 0px var(--padding);
+    
+    transition: all 0.3s;
+
+    font-size: 16px;
+}
+  
+.headerButton:hover {
+    background: var(--dark-purple);
+}
+
+.headerButton:active {
+    background: var(--darker-purple);
+}
