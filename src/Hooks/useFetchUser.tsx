@@ -1,38 +1,53 @@
 import { useEffect, useState } from 'react'
-import { User } from '../Types';
+import { FetchUserHookType, User, UserProfile } from '../Types';
 import { MyID } from '../Definitions';
 
-export function useFetchUser(id : string | undefined) {
+export function useFetchUser(user_id : string | undefined) {
     const [errorOccured, setErrorOccured] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const [fetchedUser, setFetchedUser] = useState<User | undefined>(undefined);
+    const [fetchedProfile, setFetchedProfile] = useState<UserProfile | undefined>(undefined);
+
+    async function fetchUserAndProfile() {
+        setIsLoading(true);
+
+        try {
+            const userPromise = fetch("http://localhost:3009/api/users/" + user_id);
+            const profilePromise = fetch("http://localhost:3009/api/user_profiles/" + user_id);
+
+            const responses = await Promise.all([userPromise, profilePromise]);
+
+            const userResponse = responses[0];
+            const profileResponse = responses[1];
+
+            if (userResponse.ok) {
+                const user = (await userResponse.json()) as User;
+                setFetchedUser(user);
+                setIsUser(user.user_id === MyID)
+                // TODO: Use local storage to hold individual user's id
+            }
+            else {
+                setErrorOccured(true);
+            }
+
+            if (profileResponse.ok) {
+                const profile = (await profileResponse.json()) as UserProfile;
+                setFetchedProfile(profile);
+            }
+            else {
+                setErrorOccured(true);
+            }
+        } catch {
+            setErrorOccured(true);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     useEffect(() => {
-        async function fetchUser() {
-            setIsLoading(true);
+        fetchUserAndProfile();
+    }, [user_id])
 
-            try {
-                const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users/" + id);
-
-                if (response.ok) {
-                    const parsedResponse = (await response.json()) as User;
-                    setFetchedUser(parsedResponse);
-                    setIsUser(parsedResponse.id === MyID)
-                    // TODO: Use local storage to hold individual user's id
-                }
-                else {
-                    setErrorOccured(true);
-                }
-            } catch {
-                setErrorOccured(true);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchUser();
-    }, [id])
-
-    return { errorOccured, isLoading, isUser, fetchedUser }
+    return { errorOccured, isLoading, isUser, fetchedUser, fetchedProfile, setFetchedProfile, fetchUserAndProfile } as FetchUserHookType;
 }

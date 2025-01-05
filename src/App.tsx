@@ -9,6 +9,7 @@ export const UserConnectionsContext = createContext<UserConnectionsContextType |
 
 function App() {
     const [connections, setConnections] = useState<number[]>([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <>

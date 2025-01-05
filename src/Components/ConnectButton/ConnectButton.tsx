@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { User } from '../../Types';
-import { useConnections } from '../../Hooks';
+import { User, UserProfile } from '../../Types';
+import { useFetchUser } from '../../Hooks';
+import { MyID } from '../../Definitions';
+import { PutUserProfile } from '../../Utilities';
 import ConnectButtonStyles from './ConnectButton.module.css';
 
 interface Props {
@@ -8,26 +10,52 @@ interface Props {
 }
 
 export function ConnectButton({ user } : Props) {
-    const { connections, setConnections } = useConnections();
+    const { user_id } = user;
+    
+    const { fetchedProfile, setFetchedProfile } = useFetchUser(String(MyID));
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
-        if (connections.some(connection => connection === user.id)) setIsConnected(true);
-    }, [])
-
-    function handleClick() {
-        if (!isConnected) {
-            const updatedConnections = [...connections, user.id];
-
-            setConnections(updatedConnections);
-        }
-        else {
-            const updatedProfiles = connections.filter(connection => connection !== user.id);
-
-            setConnections(updatedProfiles);
+        if (!fetchedProfile) {
+            return
         }
 
-        setIsConnected(!isConnected);
+        PutUserProfile(fetchedProfile);
+
+        setIsConnected(() => fetchedProfile.connections.includes(user_id));
+    }, [fetchedProfile])
+
+    async function handleClick() {
+        try {
+            const profilePromise = fetch("http://localhost:3009/api/user_profiles/" + MyID);
+
+            const responses = await Promise.all([profilePromise]);
+
+            const profileResponse = responses[0];
+
+            if (!profileResponse.ok) {
+                console.log("Request failed...");
+                return;
+            }
+
+            const profile = (await profileResponse.json()) as UserProfile;
+
+            if (!isConnected) {
+                setFetchedProfile({
+                    ...profile,
+                    connections : [...profile.connections, user_id]
+                })
+            }
+            else {
+                setFetchedProfile({
+                    ...profile,
+                    connections : profile.connections.filter((connection: number) => connection !== user_id)
+                })
+            }
+        }
+        catch {
+            console.log("Something went wrong...");
+        }     
     }
 
     return (
