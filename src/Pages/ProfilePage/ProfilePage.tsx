@@ -1,47 +1,11 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { User } from '../../Types';
-import { MyID } from '../../Definitions';
 import { ConnectButton, EmailButton, IconButton } from '../../Components';
+import { useFetchUser } from '../../Hooks';
 import ProfilePageStyles from './ProfilePage.module.css';
 
-interface Props {
-    connections : User[];
-    setConnections : (arg0 : User[]) => void;
-}
-
-export function ProfilePage({ connections, setConnections } : Props) {
+export function ProfilePage() {
     const id = useParams().id;
-    const [errorOccured, setErrorOccured] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isUser, setIsUser] = useState(false);
-    const [fetchedUser, setFetchedUser] = useState<User | undefined>(undefined);
-
-    useEffect(() => {
-        async function fetchUser() {
-            setIsLoading(true);
-
-            try {
-                const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users/" + id);
-
-                if (response.ok) {
-                    const parsedResponse = (await response.json()) as User;
-                    setFetchedUser(parsedResponse);
-                    setIsUser(parsedResponse.id === MyID)
-                }
-                else {
-                    setFetchedUser(undefined);
-                    setErrorOccured(true);
-                }
-            } catch {
-                setErrorOccured(true);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchUser();
-    }, [id])
+    const { errorOccured, isLoading, isUser, fetchedUser } = useFetchUser(id);
 
     if (isLoading) {
         return <div>Loading...</div>
@@ -83,7 +47,7 @@ export function ProfilePage({ connections, setConnections } : Props) {
                     </div>
                 </div>
                 { !isUser && <div className={ ProfilePageStyles.buttonContainer}>
-                                <ConnectButton user={ fetchedUser } connections={ connections } setConnections={ setConnections }/>
+                                <ConnectButton user={ fetchedUser }/>
                                 <EmailButton email={ fetchedUser.email }/>
                             </div> }
                 <InfoContainer title="Bio" info={ fetchedUser.bio }/>

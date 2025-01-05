@@ -1,38 +1,34 @@
 import { useEffect, useState } from 'react';
 import { User } from '../../Types';
+import { useConnections } from '../../Hooks';
 import ConnectButtonStyles from './ConnectButton.module.css';
 
 interface Props {
     user : User;
-    connections : User[];
-    setConnections : (arg0 : User[]) => void;
 }
 
-export function ConnectButton({ user, connections, setConnections } : Props) {
-    // TODO: use useContext hook for connections and setConnections to fix prop drilling
-
+export function ConnectButton({ user } : Props) {
+    const { connections, setConnections } = useConnections();
     const [isConnected, setIsConnected] = useState(false);
+
+    useEffect(() => {
+        if (connections.some(connection => connection === user.id)) setIsConnected(true);
+    }, [])
 
     function handleClick() {
         if (!isConnected) {
-            const updatedConnections = [...connections, user];
+            const updatedConnections = [...connections, user.id];
 
             setConnections(updatedConnections);
         }
         else {
-            const updatedProfiles = connections.filter(filteredUser => filteredUser.id !== user.id);
+            const updatedProfiles = connections.filter(connection => connection !== user.id);
 
             setConnections(updatedProfiles);
         }
 
         setIsConnected(!isConnected);
     }
-
-    useEffect(() => {
-        if (connections.some(connection => connection.id === user.id)) {
-            setIsConnected(true);
-        }
-    }, [])
 
     return (
         <button

@@ -1,62 +1,32 @@
-import { useEffect, useState } from "react";
 import { ProfileCard } from "../../Components";
-import { User } from "../../Types";
-import { MyID } from "../../Definitions";
+import { useConnections, useFetchUsers } from "../../Hooks";
 import DiscoverPageStyles from './DiscoverPage.module.css';
 
-interface Props {
-    connections : User[];
-    setConnections : (arg0 : User[]) => void;
-}
-
-export function DiscoverPage({ connections, setConnections } : Props) {
-    const [errorOccured, setErrorOccured] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [fetchedUsers, setFetchedUsers] = useState<User[]>([]);
-
-    useEffect(() => {
-        async function fetchUsers() {
-            setIsLoading(true);
-
-            try {
-                const response = await fetch("https://disc-assignment-5-users-api.onrender.com/api/users");
-
-                if (response.ok) {
-                    const parsedResponse = (await response.json()) as User[];
-                    setFetchedUsers(parsedResponse);
-                }
-                else {
-                    setFetchedUsers([]);
-                    setErrorOccured(true);
-                }
-            } catch {
-                setErrorOccured(true);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchUsers();
-    }, [])
+export function DiscoverPage() {
+    const { connections } = useConnections();
+    const { errorOccured, isLoading, fetchedUsers } = useFetchUsers();
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>
     }
 
     if (errorOccured) {
-        return <div>Something went wrong...</div>;
+        return <div>Something went wrong...</div>
     }
+
+    // TODO: probably the most expensive operation, in addition to being called on every rerender when a new connection is added (which updates the connections state). 
+    // TODO: planning on fixing this in assignment 7 by storing the list of connections for each user in the database and 
+    // TODO: making an API call to update the database instead of updating state. that way this filter operation is only performed on
+    // TODO: the initial page render when fetching data.
+    const unconnectedUsers = fetchedUsers.filter(user => !connections.includes(user.id));
 
     return (
         <div className={ DiscoverPageStyles.profiles }>
-            {fetchedUsers.filter(fetchedUser => fetchedUser.id !== MyID).map((fetchedUser) => {
+            {unconnectedUsers.map((user) => {
                 return (
                     <ProfileCard
-                        key={ fetchedUser.id } 
-                        user={ fetchedUser }
-                        backgroundURL="https://i.imgur.com/Ddu7o5o.jpeg"
-                        connections={ connections }
-                        setConnections={ setConnections }/>
+                        key={ user.id } 
+                        user={ user }/>
                 )
             })}
         </div>

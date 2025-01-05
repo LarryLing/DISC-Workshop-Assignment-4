@@ -5,12 +5,12 @@ import ProfileCardStyles from './ProfileCard.module.css';
 
 interface Props {
     user : User;
-    backgroundURL : string;
-    connections : User[];
-    setConnections : (arg0 : User[]) => void;
 }
 
-export function ProfileCard({ user, backgroundURL, connections, setConnections } : Props) {
+export function ProfileCard({ user } : Props) {
+    // TODO: make api call to get respective backgroundURL
+    const backgroundURL = "https://i.imgur.com/Ddu7o5o.jpeg";
+
     return (
         <div className={ ProfileCardStyles.profileCard }>
             <Link to={`/user/${ user.id }`} className={ ProfileCardStyles.clickableContainer }>
@@ -27,7 +27,7 @@ export function ProfileCard({ user, backgroundURL, connections, setConnections }
                 </div>
             </Link>
             <div className={ ProfileCardStyles.buttonContainer }>
-                <ConnectButton user={ user } connections={ connections } setConnections={ setConnections }/>
+                <ConnectButton user={ user }/>
             </div>
         </div>
     )

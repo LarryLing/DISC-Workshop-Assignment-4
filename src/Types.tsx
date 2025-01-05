@@ -9,3 +9,8 @@ export type User = {
     created_at : string;
     profilepicture : string;
 }
+
+export type UserConnectionsContextType = {
+    connections : number[];
+    setConnections : (arg0 : number[]) => void;
+}
