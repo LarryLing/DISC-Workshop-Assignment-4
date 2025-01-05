@@ -1,0 +1,28 @@
+.iconButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    background: var(--yellow);
+    color: black;
+
+    box-sizing: border-box;
+    border: transparent;
+    border-radius: var(--radius);
+
+    padding: calc(var(--padding) / 2);
+
+    min-width: 50px;
+
+    box-shadow: var(--shadow);
+
+    transition: all 0.3s;
+}
+
+.iconButton:hover {
+    transform: translateY(-2px);
+}
+
+.iconButton:active {
+    transform: translateY(-1px);
+}

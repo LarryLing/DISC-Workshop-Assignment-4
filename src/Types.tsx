@@ -1,8 +1,11 @@
-export type Profile = {
-    id : string;
-    name : string;
-    intro : string;
-    profileURL : string;
-    pictureURL : string;
-    backgroundURL : string;
+export type User = {
+    id : number;
+    firstname : string;
+    lastname : string;
+    email : string;
+    bio : string;
+    major : string;
+    graduationyear : number;
+    created_at : string;
+    profilepicture : string;
 }

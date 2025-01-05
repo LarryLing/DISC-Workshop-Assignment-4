@@ -1,26 +1,23 @@
 import { useState } from 'react'
-import Navbar from './Navbar/Navbar'
-import ProfileCard from './ProfileCard/ProfileCard';
-import { profiles } from './Definitions';
-import { Profile } from './Types';
-import './App.css'
+import { Navbar } from './Components';
+import { User } from './Types';
+import { DiscoverPage, HomePage, ProfilePage } from './Pages';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
 
 function App() {
-    const [connections, setConnections ] = useState<Profile[]>([]);
+    // TODO: change connections so that it is a dictionary-like object to optimize lookup times
+    const [connections, setConnections] = useState<User[]>([]);
 
     return (
         <>
             <Navbar/>
             <div className="content">
-                <div className="profiles">
-                    {profiles.map((profile) => (
-                        <ProfileCard
-                            key={ profile.id } 
-                            profile={ profile }
-                            connections={ connections }
-                            setConnections={ setConnections }/>
-                    ))}
-                </div>
+                <Routes>
+                    <Route path="/" element={ <HomePage/> }/>
+                    <Route path='/discover' element={ <DiscoverPage connections={ connections } setConnections={ setConnections }/> }/>
+                    <Route path='/user/:id' element={ <ProfilePage connections={ connections } setConnections={ setConnections }/> }/>
+                </Routes>
             </div>
         </>
     )

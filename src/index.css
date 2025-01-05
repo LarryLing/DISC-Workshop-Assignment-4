@@ -13,8 +13,14 @@
   --purple: #4E2A84;
   --dark-purple: #422370;
   --darker-purple: #371D5D;
+
+  --yellow: #FFCB05;
+  --dark-yellow: #D6AB00;
+  --darker-yellow: #B89300;
   
   --search-text: #909090;
+  
+  --dark-grey: #717171;
   
   --layout-spacing: 16px;
   --padding: 12px;
@@ -33,11 +39,15 @@ button {
     cursor: pointer;
 }
   
-p, h3, h2 {
+p, h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
 
     line-height: normal;
+}
+
+div {
+    box-sizing: border-box;
 }
 
 a:link {

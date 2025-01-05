@@ -36,38 +36,35 @@
     border: none;
     border-radius: var(--radius);
     
-    max-width: 280px;
+    max-width: 300px;
 }
   
-.buttonContainer {
+.linkContainer {
     flex: 1;
     
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
+    list-style: none;
     
     height: inherit;
 }
   
-.headerButton {
-    background: var(--purple);
-    color: inherit;
-
-    border: transparent;
+.link {
+    border-radius: var(--radius);
     
-    height: inherit;
-    
-    padding: 0px var(--padding);
+    padding: var(--padding);
     
     transition: all 0.3s;
 
     font-size: 16px;
 }
   
-.headerButton:hover {
+.link:hover {
     background: var(--dark-purple);
 }
 
-.headerButton:active {
+.link:active {
     background: var(--darker-purple);
 }
